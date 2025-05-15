@@ -168,4 +168,4 @@ if [ -f "$HOME/.env" ]; then
     load_dotenv "$HOME/.env"
 fi
 
-export PATH="$PATH:/opt/nvim/"
+export PATH="$PATH:/opt/nvim"
