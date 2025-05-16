@@ -1,5 +1,6 @@
 return {
     dir = vim.fn.stdpath('config') .. '/lua/indent-blankline.nvim',
+    enabled = false,
     main = 'ibl',
     config = function()
         require('ibl').setup()

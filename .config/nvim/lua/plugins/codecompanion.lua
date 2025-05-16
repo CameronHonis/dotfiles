@@ -55,13 +55,13 @@ return {
                     adapter = DEFAULT_ADAPTER,
                     slash_commands = {
                         -- add the vectorcode command here.
-                        codebase = require('vectorcode.integrations').codecompanion.chat.make_slash_command(),
+                        --codebase = require('vectorcode.integrations').codecompanion.chat.make_slash_command(),
                     },
                     tools = {
-                        vectorcode = {
-                            description = "run vectorcode to retrieve the project context",
-                            callback = require('vectorcode.integrations').codecompanion.chat.make_tool(),
-                        }
+                        --vectorcode = {
+                            --description = "run vectorcode to retrieve the project context",
+                            --callback = require('vectorcode.integrations').codecompanion.chat.make_tool(),
+                        --}
                     },
                 },
                 inline = {
