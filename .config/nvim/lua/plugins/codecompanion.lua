@@ -3,9 +3,10 @@ local OPENROUTER_ADAPTERS = {
     ['deepseek v3 (free)'] = { tag = 'deepseek/deepseek-chat-v3-0324:free' },
     ['llama 4 scout (free)'] = { tag = 'meta-llama/llama-4-scout:free' },
     ['gpt 4o mini'] = { tag = 'openai/gpt-4o-mini' },
+    ['gpt 4.1 mini'] = { tag = 'openai/gpt-4.1-mini' },
 }
 
-local DEFAULT_ADAPTER = 'gpt 4o mini'
+local DEFAULT_ADAPTER = 'gpt 4.1 mini'
 
 return {
     'olimorris/codecompanion.nvim',
@@ -76,9 +77,8 @@ return {
             },
         })
 
-        vim.keymap.set({ 'n', 'i' }, '<M-;>', function()
-            require('codecompanion').toggle()
-        end, { desc = 'Toggle CodeCompanion chat window' })
+        vim.keymap.set({ 'n', 'i' }, '<M-C-;>', require('codecompanion').toggle,
+            { desc = 'Toggle CodeCompanion chat window' })
     end,
     init = function()
         require('plugins.lualine.codecompanion_fidget'):init()

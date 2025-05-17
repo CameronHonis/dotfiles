@@ -3,12 +3,12 @@ return {
     version = 'v0.*',
     dependencies = { 'williamboman/mason.nvim', 'rcarriga/nvim-dap-ui' },
     keys = {
-        { '<M-b>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".toggle_breakpoint()<CR>', desc = 'toggle breakpoint for line' },
-        { '<M-c>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".continue()<CR>',          desc = 'continue [debug]' },
-        { '<M-j>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".step_over()<CR>',         desc = 'step over [debug]' },
-        { '<M-l>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".step_into()<CR>',         desc = 'step into [debug]' },
-        { '<M-h>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".step_out()<CR>',         desc = 'step out [debug]' },
-        { '<M-s>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".close()<CR>',         desc = 'stop [debug]' },
+        { '<M-C-b>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".toggle_breakpoint()<CR>', desc = 'toggle breakpoint for line' },
+        { '<M-C-c>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".continue()<CR>',          desc = 'continue [debug]' },
+        { '<M-C-j>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".step_over()<CR>',         desc = 'step over [debug]' },
+        { '<M-C-l>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".step_into()<CR>',         desc = 'step into [debug]' },
+        { '<M-C-h>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".step_out()<CR>',         desc = 'step out [debug]' },
+        { '<M-C-s>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".close()<CR>',         desc = 'stop [debug]' },
     },
     config = function()
         local dap = require('dap')

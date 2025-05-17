@@ -137,9 +137,8 @@ local plugins = {
                 },
             })
 
-            vim.keymap.set('n', '<M-;>', function()
-                require('codecompanion').toggle()
-            end, { desc = 'Toggle CodeCompanion chat window' })
+            vim.keymap.set('n', '<M-C-;>', require('codecompanion').toggle,
+                { desc = 'Toggle CodeCompanion chat window' })
         end
     }
 }
