@@ -1,23 +1,10 @@
 #!/bin/bash
 
-# set appropriate CWD
 cd "$(dirname "$0")"
 
-sudo apt update -q
-
-# apt installs
-while IFS= read -r line; do
-    # Trim leading/trailing whitespace
-    line_trimmed=$(echo "$line" | xargs)
-
-    # Skip empty lines and comments
-    if [[ -z "$line_trimmed" || "$line_trimmed" == \#* ]]; then
-        continue
-    fi
-
-    echo "Installing package: $line_trimmed"
-    sudo apt-get install -y -qq "$line_trimmed"
-done < "manual_packages.txt"
+./base/apply_keys.sh
+./base/apply_sources.sh
+./base/install_packages.sh
 
 # custom setup
 for script in custom/*.sh; do
@@ -25,4 +12,16 @@ for script in custom/*.sh; do
 done
 
 # set cron job to sync local packages with remote `manual_packages.txt`
-# probably prompt user to pick which new packages to track/ignore
+CRON_JOB="0 2 * * * base/sync_to_remote.sh"
+CRON_TMP=$(mktemp)
+
+# Check if the cron job exists, if not add it
+crontab -l 2>/dev/null | grep -F -q "$CRON_JOB"
+if [ $? -ne 0 ]; then
+  # Add the cron job
+  crontab -l 2>/dev/null > "$CRON_TMP"
+  echo "$CRON_JOB" >> "$CRON_TMP"
+  crontab "$CRON_TMP"
+fi
+
+rm -f "$CRON_TMP"
