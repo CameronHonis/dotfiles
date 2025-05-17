@@ -83,6 +83,7 @@ python3-tk
 redis-stack-server
 ripgrep
 samba
+screenfetch
 shim-signed
 smbclient
 testdisk
