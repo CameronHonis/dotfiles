@@ -14,4 +14,4 @@ while IFS= read -r line; do
 
     echo "Installing package: $line_trimmed"
     sudo apt-get install -y -qq "$line_trimmed"
-done < "../manual_packages.txt"
+done < "manual_packages.txt"

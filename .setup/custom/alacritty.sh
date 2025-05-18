@@ -1,4 +1,4 @@
-if [ ! -d /opt/alacritty]; then
+if [ ! -d /opt/alacritty ]; then
     sudo git clone https://github.com/alacritty/alacritty.git /opt/alacritty
     sudo chmod 777 -R /opt/alacritty
     cd /opt/alacritty
