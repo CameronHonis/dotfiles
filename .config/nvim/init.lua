@@ -106,6 +106,7 @@ vim.api.nvim_create_user_command('Rename', require('utils.rename_file'), { nargs
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 
 -- TODO:
+-- ripgrep search in regex & literal mode
 -- picker for mini.diff source origin (default git index)
 -- create snippets
 -- create debug/run configs
@@ -130,5 +131,5 @@ vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = 
 --  desc: Creates a new note (with boilerplate already added). does not create links.
 --
 -- 3. `Questions` & `UnansweredQuestions
---  desc: Opens questions within three connections of the current note.
+--  desc: Opens questions within X connections of the current note.
 --
