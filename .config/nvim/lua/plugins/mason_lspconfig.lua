@@ -8,7 +8,9 @@ return {
         require('mason-lspconfig').setup({
             handlers = {
                 function(server_name)
-                    require('lspconfig')[server_name].setup({})
+                    require('lspconfig')[server_name].setup({
+                        root_dir = vim.fn.getcwd(),
+                    })
                 end,
             },
         })

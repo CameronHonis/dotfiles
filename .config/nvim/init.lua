@@ -106,6 +106,8 @@ vim.api.nvim_create_user_command('Rename', require('utils.rename_file'), { nargs
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 
 -- TODO:
+-- fix `gd`
+-- in status bar, show full file path relative to workspace
 -- ripgrep search in regex & literal mode
 -- picker for mini.diff source origin (default git index)
 -- create snippets
