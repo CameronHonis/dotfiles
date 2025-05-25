@@ -67,6 +67,10 @@ return {
 
 
         local function goto_definition()
+            local pickers = require "telescope.pickers"
+            local finders = require "telescope.finders"
+            local conf = require("telescope.config").values
+
             local function handleResult(_, result, _, _)
                 if not result then
                     print("No definitions found")
@@ -76,14 +80,33 @@ return {
                 local items = {}
                 for _, loc in pairs(result) do
                     local item = {
-                        filename = vim.uri_to_fname(loc.uri),
-                        lnum = loc.range.start.line + 1,
-                        col = loc.range.start.character + 1,
+                        absPath = vim.uri_to_fname(loc.targetUri),
+                        lnum = loc.targetRange.start.line + 1,
+                        col = loc.targetRange.start.character + 1,
                     }
                     table.insert(items, item)
                 end
 
-                require('telescope').select({ results = items, prompt_title = "LSP Definitions" })
+                --vim.print(items)
+
+                -- TODO: create working picker
+                pickers.new({}, {
+                    prompt_title = "LSP Definitions",
+                    finder = finders.new_table {
+                        results = items,
+                        entry_maker = function(entry)
+                            return {
+                                value = entry,
+                                display = vim.fn.fnamemodify(entry.absPath, ':.'),
+                                ordinal = entry.absPath .. entry.lnum,
+                                path = entry.absPath,
+                                lnum = entry.lnum,
+                            }
+                        end
+                    },
+                    --sorter = conf.generic_sorter({}),
+                    sorter = conf.file_sorter({}),
+                }):find()
             end
 
             local params = vim.lsp.util.make_position_params()
