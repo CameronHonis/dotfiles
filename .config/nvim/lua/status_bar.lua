@@ -14,7 +14,7 @@ local colors = {
     violet   = '#a9a1e1',
     magenta  = '#c678dd',
     blue     = '#51afef',
-    red      = '#ec5f67',
+    red      = '#ec4f47',
 }
 
 local conditions = {
@@ -142,22 +142,15 @@ local function ins_right(component)
     table.insert(config.sections.lualine_x, component)
 end
 
---ins_left {
---function()
---return '▊'
---end,
---color = { fg = colors.blue },    -- Sets highlighting of component
---padding = { left = 0, right = 1 }, -- We don't need space before this
---}
-
 ins_left {
     'diff',
     -- Is it me or the symbol for modified us really weird
-    symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+    --symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+    symbols = { added = '', modified = ' ', removed = ' ' },
     diff_color = {
-        added = { fg = colors.green },
-        modified = { fg = colors.orange },
-        removed = { fg = colors.red },
+        added = { fg = colors.bg, bg = colors.green, gui = 'bold' },
+        modified = { fg = colors.bg, bg = colors.orange, gui = 'bold' },
+        removed = { fg = colors.bg, bg = colors.red, gui = 'bold' },
     },
     cond = conditions.hide_in_width,
 }
@@ -174,7 +167,7 @@ ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 ins_left {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
-    symbols = { error = ' ', warn = ' ', info = ' ' },
+    symbols = { error = ' ', warn = ' ', info = ' ' },
     diagnostics_color = {
         error = { fg = colors.red },
         warn = { fg = colors.yellow },
