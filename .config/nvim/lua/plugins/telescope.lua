@@ -1,3 +1,4 @@
+local builtin = require "telescope.builtin"
 return {
     'nvim-telescope/telescope.nvim',
     version = 'v2.*',
@@ -11,10 +12,10 @@ return {
         { 'c',    mode = { 'n', 'x', 'o' }, '<cmd>Telescope git_commits<CR>',                            desc = 'open git commits explorer' },
         { 'o',    mode = { 'n', 'x', 'o' }, '<cmd>GitBlameOpenCommitURL<CR>',                            desc = 'open git blame commit in browser' },
         { '<C-f>', mode = { 'n', 'x', 'o' }, ':Telescope file_browser path=%:p:h select_buffer=true<CR>', desc = 'open file browser' },
-        { 'gr',    mode = { 'n', 'x', 'o' }, require('telescope.builtin').lsp_references,                 desc = 'Go to reference(s)' },
-        { 'gi',    mode = { 'n', 'x', 'o' }, require('telescope.builtin').lsp_implementations,            desc = 'Go to implementation(s)' },
-        { 'gt',    mode = { 'n', 'x', 'o' }, require('telescope.builtin').lsp_type_definitions,           desc = 'Go to type definition(s)' },
-        { 'gd',    mode = { 'n', 'x', 'o' }, vim.lsp.buf.definition,                                      desc = 'Go to definition' },
+        { 'gr',    mode = { 'n', 'x', 'o' }, builtin.lsp_references,                 desc = 'Go to reference(s)' },
+        { 'gi',    mode = { 'n', 'x', 'o' }, builtin.lsp_implementations,            desc = 'Go to implementation(s)' },
+        { 'gt',    mode = { 'n', 'x', 'o' }, builtin.lsp_type_definitions,           desc = 'Go to type definition(s)' },
+        { 'gd',    mode = { 'n', 'x', 'o' }, builtin.lsp_definitions,                                      desc = 'Go to definition' },
     },
     config = function()
         local fb_actions = require 'telescope'.extensions.file_browser.actions
@@ -62,59 +63,9 @@ return {
                 }
             }
         }
+
         require('telescope').load_extension 'ui-select'
         require('telescope').load_extension 'file_browser'
-
-
-        local function goto_definition()
-            local pickers = require "telescope.pickers"
-            local finders = require "telescope.finders"
-            local conf = require("telescope.config").values
-
-            local function handleResult(_, result, _, _)
-                if not result then
-                    print("No definitions found")
-                    return
-                end
-
-                local items = {}
-                for _, loc in pairs(result) do
-                    local item = {
-                        absPath = vim.uri_to_fname(loc.targetUri),
-                        lnum = loc.targetRange.start.line + 1,
-                        col = loc.targetRange.start.character + 1,
-                    }
-                    table.insert(items, item)
-                end
-
-                --vim.print(items)
-
-                -- TODO: create working picker
-                pickers.new({}, {
-                    prompt_title = "LSP Definitions",
-                    finder = finders.new_table {
-                        results = items,
-                        entry_maker = function(entry)
-                            return {
-                                value = entry,
-                                display = vim.fn.fnamemodify(entry.absPath, ':.'),
-                                ordinal = entry.absPath .. entry.lnum,
-                                path = entry.absPath,
-                                lnum = entry.lnum,
-                            }
-                        end
-                    },
-                    --sorter = conf.generic_sorter({}),
-                    sorter = conf.file_sorter({}),
-                }):find()
-            end
-
-            local params = vim.lsp.util.make_position_params()
-            vim.lsp.buf_request(0, 'textDocument/definition', params, handleResult)
-        end
-
-        vim.keymap.set({ 'n', 'x', 'o' }, 'gd', goto_definition, { desc = 'goto definition' })
-
 
         local function search_backlinks()
             local search_txt = '[[' .. vim.fn.expand("%:t") .. ']]'
