@@ -102,6 +102,15 @@ vim.api.nvim_create_user_command('Rename', require('utils.rename_file'), { nargs
 -- terminal navigation toggle
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 
+-- set help buffers to be resizable using hotkeys
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "help",
+    callback = function()
+        vim.cmd('wincmd L')
+        vim.opt_local.winfixwidth = false
+    end,
+})
+
 -- TODO:
 -- fix `gd`
 -- in status bar, show full file path relative to workspace
