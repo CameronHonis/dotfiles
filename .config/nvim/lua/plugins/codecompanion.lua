@@ -1,12 +1,10 @@
 local OPENROUTER_ADAPTERS = {
-    ['gemini 2.5 pro (free)'] = { tag = 'google/gemini-2.5-pro-exp-03-25:free' },
-    ['deepseek v3 (free)'] = { tag = 'deepseek/deepseek-chat-v3-0324:free' },
-    ['llama 4 scout (free)'] = { tag = 'meta-llama/llama-4-scout:free' },
-    ['gpt 4o mini'] = { tag = 'openai/gpt-4o-mini' },
-    ['gpt 4.1 mini'] = { tag = 'openai/gpt-4.1-mini' },
+    ['[openrouter] gpt 4o mini'] = { tag = 'openai/gpt-4o-mini' },
+    ['[openrouter] gpt 4.1 mini'] = { tag = 'openai/gpt-4.1-mini' },
+    ['[openrouter] gemini 2.5 flash lite'] = { tag = 'google/gemini-2.5-flash-lite' },
 }
 
-local DEFAULT_ADAPTER = 'gpt 4.1 mini'
+local DEFAULT_ADAPTER = '[openrouter] gemini 2.5 flash lite'
 
 return {
     'olimorris/codecompanion.nvim',
@@ -60,8 +58,8 @@ return {
                     },
                     tools = {
                         --vectorcode = {
-                            --description = "run vectorcode to retrieve the project context",
-                            --callback = require('vectorcode.integrations').codecompanion.chat.make_tool(),
+                        --description = "run vectorcode to retrieve the project context",
+                        --callback = require('vectorcode.integrations').codecompanion.chat.make_tool(),
                         --}
                     },
                 },
