@@ -1,4 +1,6 @@
 local builtin = require "telescope.builtin"
+local image_previewer = require "image_preview_maker"
+
 return {
     'nvim-telescope/telescope.nvim',
     version = 'v2.*',
@@ -22,6 +24,7 @@ return {
         require('telescope').setup {
             defaults = {
                 initial_mode = "normal",
+                buffer_previewer_maker = image_previewer,
             },
             pickers = {
                 find_files = {
