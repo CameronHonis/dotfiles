@@ -10,8 +10,9 @@
 .config/*
 !.config/alacritty/
 !.config/nvim/
-.config/nvim/lazy-lock.json
 !.config/tmux/
+!.config/kitty/
+.config/nvim/lazy-lock.json
 
 !.setup/
 
