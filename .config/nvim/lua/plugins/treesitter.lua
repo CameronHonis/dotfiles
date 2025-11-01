@@ -2,6 +2,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
+        vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
         vim.api.nvim_create_autocmd('ColorScheme', {
             callback = function()
             end

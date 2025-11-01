@@ -6,8 +6,6 @@ local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 local uv = vim.uv or vim.loop
 
 -- Auto-install lazy.nvim if not present
-
-
 if not uv.fs_stat(lazypath) then
     print('Installing lazy.nvim....')
     vim.fn.system({
@@ -42,7 +40,6 @@ vim.opt.signcolumn = 'auto:2'
 
 vim.opt.foldenable = true
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false  -- Optional: start with folds closed
 vim.opt.foldlevelstart = 99 -- Optional: start with folds open
 
