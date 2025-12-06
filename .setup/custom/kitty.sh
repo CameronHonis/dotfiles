@@ -16,4 +16,9 @@ if ! which kitty >/dev/null 2>&1; then
 
     # register terminfo
     sudo ln -s ~/.local/kitty.app/share/terminfo/x/xterm-kitty /usr/share/terminfo/x/xterm-kitty
+
+    # set as default terminal (assuming no existing terminal has a priority >=
+    # 51
+    sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator ~/.local/kitty.app/bin/kitty 51
+
 fi
