@@ -54,6 +54,7 @@ return {
                 },
                 file_browser = {
                     hidden = true,
+                    initial_mode = "insert",
                     mappings = {
                         ['n'] = {
                             ['H'] = fb_actions.goto_parent_dir,
