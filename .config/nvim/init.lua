@@ -95,7 +95,11 @@ vim.keymap.set('n', '<C-j>', diagnostics.jump_to_next_diagnostic, { noremap = tr
 vim.keymap.set('n', '<C-k>', diagnostics.jump_to_prev_diagnostic, { noremap = true, silent = true })
 
 -- switch to editing this config file
-vim.api.nvim_set_keymap('n', '<C-A-A>', '<cmd>e $MYVIMRC<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-A-A>', function()
+  local path = vim.fn.expand('$MYVIMRC')
+  vim.cmd('edit ' .. path)
+  vim.cmd('lcd ' .. vim.fn.fnamemodify(path, ':h'))
+end, { noremap = true, silent = true })
 
 vim.api.nvim_create_user_command('Rename', require('utils.rename_file'), { nargs = '?', complete = 'file' })
 
