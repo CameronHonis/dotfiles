@@ -11,6 +11,7 @@ containerd.io
 curl
 dash
 diffutils
+discord
 docker-buildx-plugin
 docker-ce
 docker-ce-cli
@@ -98,4 +99,5 @@ vim
 wbritish
 wget
 wireshark
+xorg-dev
 xz-utils
