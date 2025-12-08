@@ -112,6 +112,8 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- TODO:
+-- togglable indent strategy
+-- color terminal background when in terminal mode
 -- ripgrep search in regex & literal mode
 -- picker for mini.diff source origin (default git index)
 -- create snippets
