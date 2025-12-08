@@ -3,6 +3,8 @@ local diagnostics = require('utils.diagnostics')
 require('utils.dotenv').load_dotenv({ file_path = vim.fn.stdpath('config') .. '/.env' })
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+
+--- @type {fs_stat: fun(path: string): [number, nil] | [nil, string]} uv
 local uv = vim.uv or vim.loop
 
 -- Auto-install lazy.nvim if not present
