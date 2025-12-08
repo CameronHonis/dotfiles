@@ -115,19 +115,30 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_user_command('Indent', function()
+    if vim.opt.tabstop == 2 then
+        vim.opt.tabstop = 4
+        vim.opt.shiftwidth = 4
+        print("indent width set to 4")
+    else
+        vim.opt.tabstop = 2
+        vim.opt.shiftwidth = 2
+        print("indent width set to 2")
+    end
+end, {})
+
 -- TODO:
--- togglable indent strategy
 -- color terminal background when in terminal mode
 -- ripgrep search in regex & literal mode
 -- picker for mini.diff source origin (default git index)
--- create snippets
--- create debug/run configs
 -- commenting in .md files instead toggles cross-out decoration
 -- FIX: `gr` (at least in .md files) stalls for a second
 -- live update of diff in status bar (from buffer not file)
 -- disable auto-insert comment symbol on new line
 -- utilize nvim line wrapping but modify nav controls to respect line wraps
 -- file search and file browser should have "show hidden files" state
+-- create debug/run configs
+-- create snippets
 --
 --
 -- Plugins to try:
