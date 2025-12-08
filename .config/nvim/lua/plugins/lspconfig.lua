@@ -46,6 +46,8 @@ return {
     config = function()
         vim.keymap.set({ 'n', 'i' }, '<F5>', '<cmd>LspRestart<CR>', { noremap = true, silent = true })
         vim.keymap.set({ 'n', 'i' }, '<C-A-P>', vim.lsp.buf.signature_help, { noremap = true, silent = true })
+        vim.keymap.set({ 'n', 'i' }, '<M-C-P>', vim.lsp.buf.signature_help, { noremap = true, silent = true }) --compatible with kitty
+        vim.keymap.set({ 'n' }, '<C-H>', vim.lsp.buf.hover, { noremap = true, silent = true })
         vim.keymap.set({ 'n', 'i' }, '<C-A-R>', vim.lsp.buf.rename, { noremap = true, silent = true })
         vim.keymap.set({ 'n', 'i' }, '<M-CR>', vim.lsp.buf.code_action, { noremap = true, silent = true })
 
