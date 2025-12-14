@@ -61,7 +61,7 @@ return {
                             ['<BS>'] = function() end,
                         },
                         ['i'] = {
-                            ['<BS>'] = function() end,
+                            --['<BS>'] = function() end,
                         }
                     }
                 }
