@@ -98,12 +98,14 @@ vim.keymap.set('n', '<C-k>', diagnostics.jump_to_prev_diagnostic, { noremap = tr
 
 -- switch to editing this config file
 vim.keymap.set('n', '<C-A-A>', function()
-  local path = vim.fn.expand('$MYVIMRC')
-  vim.cmd('edit ' .. path)
-  vim.cmd('lcd ' .. vim.fn.fnamemodify(path, ':h'))
+    local path = vim.fn.expand('$MYVIMRC')
+    vim.cmd('edit ' .. path)
+    vim.cmd('lcd ' .. vim.fn.fnamemodify(path, ':h'))
 end, { noremap = true, silent = true })
 
 vim.api.nvim_create_user_command('Rename', require('utils.rename_file'), { nargs = '?', complete = 'file' })
+vim.api.nvim_create_user_command('GitRestore', require('utils.git_restore'),
+    { desc = 'restore current file to git HEAD' })
 
 -- terminal navigation toggle
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
