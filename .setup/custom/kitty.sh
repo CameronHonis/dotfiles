@@ -1,8 +1,11 @@
 if ! which kitty >/dev/null 2>&1; then
+    echo "kitty not found"
+    echo "downloading kitty..."
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-    # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
 
+    # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
     # your system-wide PATH)
+    echo "installing kitty..."
     sudo ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten /usr/local/bin
     # Place the kitty.desktop file somewhere it can be found by the OS
     cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
@@ -21,4 +24,5 @@ if ! which kitty >/dev/null 2>&1; then
     # 51
     sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator ~/.local/kitty.app/bin/kitty 51
 
+    echo "kitty installed"
 fi
