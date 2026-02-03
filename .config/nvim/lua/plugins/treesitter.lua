@@ -1,50 +1,43 @@
 return {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
     config = function()
-        vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+        vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo[0][0].foldmethod = 'expr'
 
-        vim.api.nvim_create_autocmd('ColorScheme', {
-            callback = function()
-            end
+        -- try highlighting for all files
+        vim.api.nvim_create_autocmd('FileType', {
+            callback = function() pcall(vim.treesitter.start) end,
         })
 
-        require("nvim-treesitter.configs").setup({
-            ensure_installed = {
-                "bash",
-                "c",
-                "cpp",
-                "csv",
-                "cuda",
-                "dockerfile",
-                "go",
-                "html",
-                "java",
-                "javascript",
-                "json",
-                "lua",
-                "make",
-                "markdown",
-                "markdown_inline",
-                "python",
-                "rust",
-                "sql",
-                "toml",
-                "tsv",
-                "typescript",
-                "xml",
-                "yaml",
-                "zig",
-            },
-            fold = {
-                enable = true,
-            },
-            highlight = {
-                enable = true,
-            },
-            -- Add other modules as needed, e.g., indent, matchup
-            -- indent = { enable = true },
-            -- matchup = { enable = true },
+        require('nvim-treesitter').install({
+            "bash",
+            "c",
+            "cpp",
+            "csv",
+            "cuda",
+            "dockerfile",
+            "go",
+            "html",
+            "java",
+            "javascript",
+            "json",
+            "latex", --optional for render-markdown plugin
+            "lua",
+            "make",
+            "markdown",        --required for render-markdown plugin
+            "markdown_inline", --required for render-markdown plugin
+            "python",
+            "rust",
+            "sql",
+            "toml",
+            "tsv",
+            "typescript",
+            "xml",
+            "yaml",
+            "zig",
         })
     end,
 }
