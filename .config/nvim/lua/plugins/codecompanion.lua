@@ -2,9 +2,10 @@ local OPENROUTER_ADAPTERS = {
     ['[openrouter] gpt 4o mini'] = { tag = 'openai/gpt-4o-mini' },
     ['[openrouter] gpt 4.1 mini'] = { tag = 'openai/gpt-4.1-mini' },
     ['[openrouter] gemini 2.5 flash lite'] = { tag = 'google/gemini-2.5-flash-lite' },
+    ['[openrouter] gemini 3 flash preview'] = { tag = 'google/gemini-3-flash-preview' },
 }
 
-local DEFAULT_ADAPTER = '[openrouter] gemini 2.5 flash lite'
+local DEFAULT_ADAPTER = '[openrouter] gemini 3 flash preview'
 
 return {
     'olimorris/codecompanion.nvim',
