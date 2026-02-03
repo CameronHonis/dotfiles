@@ -1,5 +1,4 @@
 local builtin = require "telescope.builtin"
-local image_previewer = require "image_preview_maker"
 
 return {
     'nvim-telescope/telescope.nvim',
@@ -24,7 +23,6 @@ return {
         require('telescope').setup {
             defaults = {
                 initial_mode = "normal",
-                buffer_previewer_maker = image_previewer,
             },
             pickers = {
                 find_files = {
@@ -58,10 +56,10 @@ return {
                     mappings = {
                         ['n'] = {
                             ['H'] = fb_actions.goto_parent_dir,
-                            ['<BS>'] = function() end,
+                            ['<bs>'] = function() end,
                         },
                         ['i'] = {
-                            --['<BS>'] = function() end,
+                            ['<bs>'] = function() print("asdf") end,
                         }
                     }
                 }
