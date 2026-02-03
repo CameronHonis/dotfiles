@@ -9,15 +9,14 @@ local DEFAULT_ADAPTER = '[openrouter] gemini 3 flash preview'
 
 return {
     'olimorris/codecompanion.nvim',
-    version = 'v14.*',
+    version = 'v18.*',
     dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-treesitter/nvim-treesitter',
         'j-hui/fidget.nvim',
-        'Davidyz/VectorCode',
     },
     config = function()
-        local make_openrouter_adapter = function(model)
+        local make_openrouter_adapter = function(model_tag)
             return function()
                 local openrouter_key = os.getenv('OPENROUTER_API_KEY')
                 return require('codecompanion.adapters').extend('openai_compatible', {
@@ -28,7 +27,7 @@ return {
                     },
                     schema = {
                         model = {
-                            default = model,
+                            default = model_tag,
                         },
                     },
                 })
@@ -49,19 +48,15 @@ return {
                     }
                 }
             },
-            adapters = or_adapters,
+            adapters = {
+                http = or_adapters,
+            },
             strategies = {
                 chat = {
                     adapter = DEFAULT_ADAPTER,
                     slash_commands = {
-                        -- add the vectorcode command here.
-                        --codebase = require('vectorcode.integrations').codecompanion.chat.make_slash_command(),
                     },
                     tools = {
-                        --vectorcode = {
-                        --description = "run vectorcode to retrieve the project context",
-                        --callback = require('vectorcode.integrations').codecompanion.chat.make_tool(),
-                        --}
                     },
                 },
                 inline = {
