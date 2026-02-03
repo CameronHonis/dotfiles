@@ -4,8 +4,15 @@ require('utils.dotenv').load_dotenv({ file_path = vim.fn.stdpath('config') .. '/
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 
+local venv_path = vim.fn.stdpath('config') .. '/python/.venv/bin'
+vim.env.PATH = venv_path .. ':' .. vim.env.PATH
+
+vim.g.python3_host_prog = venv_path .. '/python3'
+
 --- @type {fs_stat: fun(path: string): [number, nil] | [nil, string]} uv
 local uv = vim.uv or vim.loop
+
+vim.g.mapleader = " "
 
 -- Auto-install lazy.nvim if not present
 if not uv.fs_stat(lazypath) then
