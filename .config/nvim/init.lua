@@ -1,5 +1,5 @@
+require('colors')
 local diagnostics = require('utils.diagnostics')
-
 require('utils.dotenv').load_dotenv({ file_path = vim.fn.stdpath('config') .. '/.env' })
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -60,8 +60,6 @@ vim.cmd [[ highlight ColorColumn guibg=#151820 ]]
 vim.opt.colorcolumn = "80" -- Set the desired color column position
 
 -- move me to syntax_colors.lua
-vim.api.nvim_set_hl(0, 'TSMarkupStrong', { bold = true, underline = true, fg = '#FF5733' })
-
 vim.diagnostic.config({
     virtual_text = true,
     severity_sort = true,     -- Sort diagnostics by severity (errors first)
@@ -70,13 +68,6 @@ vim.diagnostic.config({
     },
     signs = true,
 })
-
--- Set diagnostic underline colors based on severity
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { underline = false, bg = '#dd0000' }) -- Red for errors
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = false, bg = '#dd6600' })  -- Yellow for warnings
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = false, bg = '#0066dd' })  -- Blue for info
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = false, bg = '#00dd66' })  -- Green for hints
-
 
 -- nops
 vim.api.nvim_set_keymap('n', '<C-S-O>', '<Nop>', { noremap = true, silent = true })
@@ -120,34 +111,3 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_user_command('IndentToggle', require('utils.indent_toggle'), {})
-
--- TODO:
--- color terminal background when in terminal mode
--- file search and file browser should have "show hidden files" state
--- ripgrep search in regex & literal mode
--- utilize nvim line wrapping but modify nav controls to respect line wraps
--- picker for mini.diff source origin (default git index)
--- commenting in .md files instead toggles cross-out decoration
--- FIX: `gr` (at least in .md files) stalls for a second
--- live update of diff in status bar (from buffer not file)
--- disable auto-insert comment symbol on new line
--- create debug/run configs
--- create snippets
---
---
--- Plugins to try:
--- conform.nvim
--- oil.nvim
---
--- Note Taking tools:
--- 1. `Idea` & `Question`
---  requires: file (note) name
---  desc: Creates new note (with boilerplate already added) and adds a link back to the last note, if last buffer contents was a note
---
--- 2. `Concept`
---  requires: file (note) name
---  desc: Creates a new note (with boilerplate already added). does not create links.
---
--- 3. `Questions` & `UnansweredQuestions
---  desc: Opens questions within X connections of the current note.
---

@@ -1,0 +1,7 @@
+vim.api.nvim_set_hl(0, '@markup.strong.markdown_inline', { fg = '#FFAAFF', bold = true })
+
+-- Set diagnostic underline colors based on severity
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { underline = false, bg = '#dd0000' }) -- Red for errors
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = false, bg = '#dd6600' })  -- Yellow for warnings
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = false, bg = '#0066dd' })  -- Blue for info
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = false, bg = '#00dd66' })  -- Green for hints
