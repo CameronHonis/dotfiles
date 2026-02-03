@@ -14,3 +14,12 @@ quick fox jumps over the lazy brown dogthe quick fox jumps over the lazy the
 quick fox jumps over the lazy brown dogthe quick fox jumps over the lazy the
 quick fox jumps over the lazy brown dogthe quick fox jumps over the lazy the
 quick fox jumps over the lazy brown dogthe quick fox jumps over the lazy
+
+
+$$
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
