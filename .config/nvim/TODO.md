@@ -25,6 +25,7 @@
 - [ ] ONGOING: create **debug/run** configs
 
 # to try:
+* plugins `swap-diff.nvim` vs `recover.nvim`
 * `snacks.nvim`'s pickers instead of telescope
 * plugin `conform.nvim`
 * plugin `oil.nvim`

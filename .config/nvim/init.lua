@@ -53,9 +53,6 @@ vim.opt.foldenable = false  -- Optional: start with folds closed
 vim.opt.foldlevelstart = 99 -- Optional: start with folds open
 
 vim.opt.textwidth = 80
-vim.opt.wrap = true
-vim.opt.linebreak = true
-vim.opt.list = false
 
 
 vim.wo.number = true
