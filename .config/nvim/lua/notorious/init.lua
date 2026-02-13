@@ -1,42 +1,74 @@
 local M = {}
 
-M.CreateConceptFile = function()
-    local curr_file_name = vim.fn.expand('%:t')
-    local to_link_input = vim.fn.input('Link from ' .. curr_file_name .. '? [y/n]')
-    local to_link = to_link_input == 'y'
+M.WriteAtCursor = function(text, offset_r, offset_c)
+    local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    local r = cursor_pos[1] - 1 + offset_r
+    local c = cursor_pos[2] + offset_c
+    vim.api.nvim_buf_set_text(0, r, c, r, c, { text })
+end
 
-    local filename = vim.fn.input('Enter file name: ')
-    if not filename:match('%.md$') then
-        filename = filename .. '.md'
+M.MoveToBottom = function(filename, is_insert_mode)
+    if is_insert_mode == nil then
+        is_insert_mode = true
     end
-
-    local template = '**date:** ' .. os.date('%d-%b-%Y')
-    template = template .. '\n**type:** concept'
-    if to_link then
-        template = template .. '\n**origin:** [[' .. curr_file_name .. ']]'
-    end
-    template = template .. '\n\n'
-
-    -- Create or open the file
-    local file = io.open(filename, 'w')
-    if file then
-        file:write(template)
-        file:close()
-    end
-
     -- open file in the current buf
     vim.cmd('edit ' .. filename)
 
     -- move to bottom of file and enter insert mode
     local lines_cnt = vim.api.nvim_buf_line_count(0)
     vim.api.nvim_win_set_cursor(0, { lines_cnt, 0 })
-    vim.cmd('startinsert')
+    if is_insert_mode then
+        vim.cmd('startinsert')
+    end
+end
+
+M.CreateNote = function(is_branch)
+    if is_branch == nil then is_branch = true end
+
+    local new_filename = os.date('!%Y%m%dT%H%M%SZ') .. '.md'
+    local curr_filename = vim.fn.expand('%:t')
+    local is_md = curr_filename:match('%.md$')
+    is_branch = is_branch and is_md -- only branch from md files
+
+
+    local heading = vim.fn.input('heading: ')
+    if heading == '' then return end
+
+    -- ask for branch in prompt
+    if is_branch then
+        local branch_input = vim.fn.input('is branching? [y]/n: ')
+        if branch_input == 'n' or branch_input == 'no' then
+            is_branch = false
+        end
+    end
+
+    local template = ""
+
+    if is_branch then -- inject link in current note
+        local tag_input = vim.fn.input('ref tag [blank for heading]: ')
+        local tag = tag_input ~= '' and tag_input or heading
+        local tag_md = ' [' .. tag .. '](' .. new_filename .. ')'
+        M.WriteAtCursor(tag_md, 0, 1)
+
+        template = template .. '[origin](' .. curr_filename .. ')\n\n'
+    end
+
+    template = template .. '# ' .. heading .. '\n\n'
+
+    -- Create or open the file
+    local file = io.open(new_filename, 'w')
+    if file then
+        file:write(template)
+        file:close()
+    end
+
+    M.MoveToBottom(new_filename)
 end
 
 M.setup = function(opts)
     opts = opts or {}
 
-    vim.api.nvim_create_user_command('Concept', M.CreateConceptFile, {})
+    vim.api.nvim_create_user_command('Note', M.CreateNote, {})
 end
 
 return M
