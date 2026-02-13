@@ -115,3 +115,17 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_user_command('IndentToggle', require('utils.indent_toggle'), {})
+
+-- copy file name
+vim.keymap.set('n', '<leader>cf', function()
+    local filename = vim.fn.expand('%:t')
+    vim.fn.setreg('+', filename)
+    print("Copied filename: " .. filename)
+end, { desc = "Copy current filename to clipboard" })
+
+-- copy file path
+vim.keymap.set('n', '<leader>cp', function()
+    local filepath = vim.api.nvim_buf_get_name(0)
+    vim.fn.setreg('+', filepath)
+    print("Copied path: " .. filepath)
+end, { desc = "Copy current file path to clipboard" })
