@@ -14,6 +14,7 @@
 
 ## Medium
 - [ ] fix `black` formatter
+- [ ] add treesitter nav jumps (including jupiter nb)
 - [ ] file search and file browser should have "**show hidden files**" state
 - [ ] ripgrep search in **regex & literal** mode
 - [ ] color **terminal background** when in terminal mode
