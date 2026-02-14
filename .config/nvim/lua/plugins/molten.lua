@@ -166,17 +166,5 @@ return {
                 end
             end,
         })
-
-        require("lspconfig")["pyright"].setup({
-            settings = {
-                python = {
-                    analysis = {
-                        diagnosticSeverityOverrides = {
-                            reportUnusedExpression = "none",
-                        },
-                    },
-                },
-            },
-        })
     end,
 }
