@@ -62,8 +62,8 @@ return {
         })
 
         local is_diff_on = false
-        function toggleDiff()
-            require('mini.diff').toggle_overlay()
+        local function toggleDiff()
+            require('mini.diff').toggle_overlay(0)
             is_diff_on = not is_diff_on
             if is_diff_on then
                 print("diff mode: ON")
@@ -72,7 +72,6 @@ return {
             end
         end
 
-        vim.keymap.set('n', '<C-A-d>', toggleDiff, { desc = 'toggle minidiff overlay' })
         vim.api.nvim_create_user_command('Diff', toggleDiff, { nargs = '?', complete = 'file' })
     end
 }
