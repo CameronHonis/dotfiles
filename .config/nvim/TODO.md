@@ -2,7 +2,6 @@
 ## Easy
 - [ ] update keybinds for molten
 - [ ] enable treesitter navigation for molten
-- [ ] FIX: `gr` (at least in .md files) stalls for a second
 - [ ] use `smajwill/nvim-unception` to allow using git in nvim
 - [ ] shells spawned in nvim (via `:term`) should inherit state from parent shell
 - [ ] remove floaterminal
