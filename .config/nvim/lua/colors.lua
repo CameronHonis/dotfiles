@@ -31,5 +31,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
             { underline = false, bg = '#0066dd' }) -- Blue for info
         vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint',
             { underline = false, bg = '#00dd66' }) -- Green for hints
+
+        vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'Comment' })
     end
 })

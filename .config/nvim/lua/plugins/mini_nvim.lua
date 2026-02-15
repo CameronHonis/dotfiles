@@ -2,6 +2,9 @@ return {
     'echasnovski/mini.nvim',
     version = 'v0.*',
     config = function()
+        require('mini.indentscope').setup({
+            draw = { animation = require('mini.indentscope').gen_animation.quadratic({ duration = 4 }) }
+        })
         require('mini.diff').setup({
             -- Options for how hunks are visualized
             view = {
