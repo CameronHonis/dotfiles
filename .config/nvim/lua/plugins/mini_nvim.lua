@@ -2,6 +2,7 @@ return {
     'echasnovski/mini.nvim',
     version = 'v0.*',
     config = function()
+        require('mini.trailspace').setup()
         require('mini.surround').setup()
         require('mini.indentscope').setup({
             draw = { animation = require('mini.indentscope').gen_animation.quadratic({ duration = 4 }) }
