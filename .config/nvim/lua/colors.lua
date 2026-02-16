@@ -5,6 +5,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         vim.api.nvim_set_hl(0, '@markup.strong.markdown_inline',
             { fg = '#FFAAFF', bold = true })
 
+        vim.api.nvim_set_hl(0, '@markup.math.latex',
+            { fg = '#CCCCCC' })
+
         vim.api.nvim_set_hl(0, 'RenderMarkdownH1Bg',
             { bg = '#000000', force = true })
         vim.api.nvim_set_hl(0, 'RenderMarkdownH2Bg',
