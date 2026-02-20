@@ -45,7 +45,7 @@ M.CreateNote = function(is_branch)
     local template = ""
 
     if is_branch then -- inject link in current note
-        local tag_input = vim.fn.input('ref tag [blank for heading]: ')
+        local tag_input = vim.fn.input('tag: ', heading)
         local tag = tag_input ~= '' and tag_input or heading
         local tag_md = ' [' .. tag .. '](' .. new_filename .. ')'
         M.WriteAtCursor(tag_md, 0, 1)
