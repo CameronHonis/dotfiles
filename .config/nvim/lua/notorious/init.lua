@@ -22,8 +22,10 @@ M.MoveToBottom = function(filename, is_insert_mode)
     end
 end
 
-M.CreateNote = function(is_branch)
-    if is_branch == nil then is_branch = true end
+M.CreateNote = function(opts)
+    opts = opts or {}
+    local is_branch = false
+    if opts.is_branch == nil then is_branch = true end
 
     local new_filename = os.date('!%Y%m%dT%H%M%SZ') .. '.md'
     local curr_filename = vim.fn.expand('%:t')
@@ -31,8 +33,11 @@ M.CreateNote = function(is_branch)
     is_branch = is_branch and is_md -- only branch from md files
 
 
-    local heading = vim.fn.input('heading: ')
-    if heading == '' then return end
+    local heading = opts.args
+    if heading == nil or heading == '' then
+        heading = vim.fn.input('heading: ')
+        if heading == '' then return end
+    end
 
     -- ask for branch in prompt
     if is_branch then
@@ -68,7 +73,7 @@ end
 M.setup = function(opts)
     opts = opts or {}
 
-    vim.api.nvim_create_user_command('Note', M.CreateNote, {})
+    vim.api.nvim_create_user_command('Note', M.CreateNote, { nargs = '*' })
 end
 
 return M
