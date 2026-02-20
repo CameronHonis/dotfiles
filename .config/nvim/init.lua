@@ -137,3 +137,4 @@ vim.keymap.del('n', 'grr')
 vim.keymap.del('n', 'gri')
 vim.keymap.del('n', 'grt')
 
+vim.api.nvim_create_user_command('Capture', require('utils.capture'), { nargs = '+', desc = 'capture command output and send to a scratch buffer' })

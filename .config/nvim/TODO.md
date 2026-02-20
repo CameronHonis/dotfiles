@@ -1,5 +1,6 @@
 # TODO
 ## Easy
+- [ ] fix 'Capture' util
 - [ ] update keybinds for molten
 - [ ] enable treesitter navigation for molten
 - [ ] use `smajwill/nvim-unception` to allow using git in nvim
