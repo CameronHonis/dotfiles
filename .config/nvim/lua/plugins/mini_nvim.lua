@@ -5,7 +5,10 @@ return {
         require('mini.trailspace').setup()
         require('mini.surround').setup()
         require('mini.indentscope').setup({
-            draw = { animation = require('mini.indentscope').gen_animation.quadratic({ duration = 4 }) }
+            draw = {
+                animation = require('mini.indentscope').gen_animation.quadratic({ duration = 4 })
+            },
+            symbol = '│',
         })
         require('mini.diff').setup({
             -- Options for how hunks are visualized
