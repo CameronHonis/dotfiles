@@ -1,0 +1,9 @@
+[user]
+	name = cameron
+	email = cameron-04@hotmail.com
+[core]
+	editor = nvim
+[init]
+	defaultBranch = main
+[submodule]
+	recurse = true
