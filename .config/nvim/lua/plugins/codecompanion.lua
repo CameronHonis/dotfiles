@@ -7,7 +7,7 @@ local OPENROUTER_ADAPTERS = {
     ['[openrouter] glm 5'] = { tag = 'z-ai/glm-5' },
 }
 
-local DEFAULT_ADAPTER = '[openrouter] glm 5'
+local DEFAULT_ADAPTER = '[openrouter] gemini 3 flash preview'
 
 return {
     'olimorris/codecompanion.nvim',
