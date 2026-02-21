@@ -12,6 +12,8 @@ curl
 dash
 diffutils
 discord
+displaylink-driver
+dkms
 docker-buildx-plugin
 docker-ce
 docker-ce-cli
@@ -90,6 +92,7 @@ samba
 screenfetch
 shim-signed
 smbclient
+synaptics-repository-keyring
 testdisk
 tk-dev
 tmux
