@@ -1,5 +1,6 @@
 # TODO
 ## Easy
+- [ ] allow GitRevert to work in selection only
 - [ ] fix 'Capture' util
 - [ ] update keybinds for molten
 - [ ] enable treesitter navigation for molten
