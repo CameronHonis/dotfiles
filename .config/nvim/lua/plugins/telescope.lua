@@ -7,7 +7,7 @@ return {
         'nvim-lua/plenary.nvim',
     },
     keys = {
-        { '<C-P>', mode = { 'n', 'x', 'o' }, '<cmd>Telescope find_files<CR>',                             desc = 'open file search by name' },
+        { '<C-P>', mode = { 'n', 'x', 'o', 'i', 't' }, '<cmd>Telescope find_files<CR>',                             desc = 'open file search by name' },
         { 'rg',    mode = { 'n', 'x', 'o' }, '<cmd>Telescope live_grep<CR>',                              desc = 'open project rip grep' },
         { 'gs',    mode = { 'n', 'x', 'o' }, '<cmd>Telescope lsp_document_symbols<CR>',                   desc = 'open document symbol search' },
         { 'c',    mode = { 'n', 'x', 'o' }, '<cmd>Telescope git_commits<CR>',                            desc = 'open git commits explorer' },
