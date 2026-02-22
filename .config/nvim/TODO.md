@@ -2,6 +2,7 @@
 ## Easy
 - [ ] allow GitRevert to work in selection only
 - [ ] fix 'Capture' util
+- [ ] add remote syncing
 - [ ] update keybinds for molten
 - [ ] enable treesitter navigation for molten
 - [ ] use `smajwill/nvim-unception` to allow using git in nvim
