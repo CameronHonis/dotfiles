@@ -137,4 +137,10 @@ vim.keymap.del('n', 'grr')
 vim.keymap.del('n', 'gri')
 vim.keymap.del('n', 'grt')
 
+-- enable jumping around regardless of the mode
+vim.keymap.set({'i', 'n', 't'}, '<C-w>h', [[<C-\><C-n><C-w>h]], { noremap = true, silent = true })
+vim.keymap.set({'i', 'n', 't'}, '<C-w>j', [[<C-\><C-n><C-w>j]], { noremap = true, silent = true })
+vim.keymap.set({'i', 'n', 't'}, '<C-w>k', [[<C-\><C-n><C-w>k]], { noremap = true, silent = true })
+vim.keymap.set({'i', 'n', 't'}, '<C-w>l', [[<C-\><C-n><C-w>l]], { noremap = true, silent = true })
+
 vim.api.nvim_create_user_command('Capture', require('utils.capture'), { nargs = '+', desc = 'capture command output and send to a scratch buffer' })
