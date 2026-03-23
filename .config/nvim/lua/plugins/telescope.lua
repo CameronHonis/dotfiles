@@ -22,12 +22,11 @@ return {
         local fb_actions = require 'telescope'.extensions.file_browser.actions
         require('telescope').setup {
             defaults = {
-                initial_mode = "normal",
+                initial_mode = "insert",
             },
             pickers = {
                 find_files = {
                     hidden = true,
-                    initial_mode = "insert",
                     find_command = {
                         "rg",
                         "--files",
@@ -40,10 +39,6 @@ return {
                 },
                 live_grep = {
                     hidden = true,
-                    initial_mode = "insert",
-                },
-                lsp_document_symbols = {
-                    initial_mode = "insert",
                 },
             },
             extensions = {
@@ -52,15 +47,14 @@ return {
                 },
                 file_browser = {
                     hidden = true,
-                    initial_mode = "insert",
                     mappings = {
-                        ['n'] = {
-                            ['H'] = fb_actions.goto_parent_dir,
-                            ['<bs>'] = function() end,
-                        },
-                        ['i'] = {
-                            ['<bs>'] = function() print("asdf") end,
-                        }
+                        --['n'] = {
+                            --['H'] = fb_actions.goto_parent_dir,
+                            --['<bs>'] = function() end,
+                        --},
+                        --['i'] = {
+                            --['<bs>'] = function() print("asdf") end,
+                        --}
                     }
                 }
             }
