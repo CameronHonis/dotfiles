@@ -24,6 +24,7 @@
         dolt
         fd
 		ffmpeg
+        lazygit
 		libclang
         libffi
 		libgcc
