@@ -31,3 +31,6 @@
 !.local/share/fonts/**
 
 !.config/opencode/
+
+!.jupyter/
+.jupyter/lab/workspaces/
