@@ -11,7 +11,12 @@ local function format()
     if has_formatter then
         vim.lsp.buf.format()
         print("formatted via LSP")
-    else
+    elseif vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":e") == "py" then
+        if vim.fn.executable("black") ~= 1 then
+            print("formatter executable `black` is not installed")
+            return
+        end
+
         local view = vim.fn.winsaveview()
         local buf = vim.api.nvim_get_current_buf()
         local original_text = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
@@ -37,6 +42,8 @@ local function format()
         -- Remove temp file
         os.remove(tmpname)
         print("formatted via python black")
+    else
+        print("no active or fallback formatter")
     end
 end
 
