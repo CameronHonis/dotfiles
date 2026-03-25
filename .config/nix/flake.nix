@@ -19,6 +19,7 @@
         paths = with pkgs; [
         anki-bin
         bzip3
+        black
 		cmake
 		docker
         dolt
