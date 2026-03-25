@@ -21,9 +21,12 @@
         bzip3
 		cmake
 		docker
+        dolt
         fd
 		ffmpeg
+        lazygit
 		libclang
+        libffi
 		libgcc
 		libllvm
 		gimp
@@ -45,11 +48,13 @@
 		nmap
         nodejs_24
 		obs-studio
+        opencode
         openssh
         os-prober
         pipx
         postgresql
         protobuf
+        protonvpn-gui
         pyenv
 		python315
 		redis
@@ -63,6 +68,7 @@
         tree-sitter
         unixODBC
         util-linux
+        uv
         vcpkg
         vim
 		wget
