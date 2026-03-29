@@ -8,6 +8,7 @@
             "prompt": " ",
             "permission": {
                 "*": "deny",
+                "websearch": "ask"
             },
         }
     },
