@@ -178,3 +178,5 @@ alias copytoclip='xclip -selection clipboard < '
 # Vcpkg setup
 export VCPKG_ROOT="$HOME/.local/share/vcpkg" # Or your chosen location
 export PATH="$VCPKG_ROOT:$PATH"
+
+export EDITOR="nvim"
