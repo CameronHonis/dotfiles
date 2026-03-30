@@ -131,7 +131,6 @@ export PATH="$PATH:/lib/lua-5.4.6/src"
 
 export PATH="$PATH:/usr/lib/poetry/bin"
 export TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
-export TERMINFO=~/.terminfo
 
 sudo_nvim_with_config() {
     if [ "$1" = "nvim" ]; then
