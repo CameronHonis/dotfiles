@@ -3,12 +3,31 @@
     "theme": "tokyonight",
     "default_agent": "chat",
     "agent": {
+        "build": {
+            "color": "#FF966C"
+        },
+        "plan": {
+            "color": "#C3E88D"
+        },
         "chat": {
-            "description": "no access to tooling",
+            "color": "#C099FF",
+            "description": "general chat model that has access to the web",
             "prompt": " ",
             "permission": {
                 "*": "deny",
-                "websearch": "ask"
+                "websearch": "allow"
+            }
+        },
+        "local chat": {
+            "color": "#FF757F",
+            "description": "general chat model that has access to the web and can read the local file system",
+            "prompt": " ",
+            "permission": {
+                "*": "deny",
+                "websearch": "allow",
+                "read": "allow",
+                "grep": "allow",
+                "list": "allow",
             },
         }
     },
