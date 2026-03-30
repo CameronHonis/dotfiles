@@ -51,9 +51,6 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldenable = false  -- Optional: start with folds closed
 vim.opt.foldlevelstart = 99 -- Optional: start with folds open
 
-vim.opt.textwidth = 80
-
-
 vim.wo.number = true
 vim.wo.relativenumber = true
 
