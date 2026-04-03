@@ -20,6 +20,7 @@
         anki-bin
         bzip3
         black
+        bottom
 		cmake
 		docker
         dolt
