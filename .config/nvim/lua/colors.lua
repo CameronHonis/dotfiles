@@ -36,5 +36,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
             { underline = false, bg = '#00dd66' }) -- Green for hints
 
         vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'Comment' })
+
+        vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg = '#ff0000', bold = true })
+        vim.api.nvim_set_hl(0, 'DapBreakpointCondition', { fg = '#ff0000', bold = true })
     end
 })

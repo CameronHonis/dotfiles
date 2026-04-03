@@ -1,64 +1,34 @@
+local dap = require("dap")
+
+local function set_cond_breakpoint()
+    local cond = vim.fn.input("Breakpoint condition: ")
+    dap.set_breakpoint(cond)
+end
+
+local function dapui_eval_expr()
+    require('dapui').eval()
+end
+
 return {
     'mfussenegger/nvim-dap',
     version = 'v0.*',
     dependencies = { 'williamboman/mason.nvim', 'rcarriga/nvim-dap-ui' },
     keys = {
-        { '<M-C-b>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".toggle_breakpoint()<CR>', desc = 'toggle breakpoint for line' },
-        { '<M-C-c>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".continue()<CR>',          desc = 'continue [debug]' },
-        { '<M-C-j>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".step_over()<CR>',         desc = 'step over [debug]' },
-        { '<M-C-l>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".step_into()<CR>',         desc = 'step into [debug]' },
-        { '<M-C-h>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".step_out()<CR>',         desc = 'step out [debug]' },
-        { '<M-C-s>',       mode = { 'n', 'i' }, '<cmd>lua require"dap".close()<CR>',         desc = 'stop [debug]' },
+        { '<M-C-b>',   mode = { 'n', 'i' }, dap.toggle_breakpoint, desc = 'toggle breakpoint for line' },
+        { '<M-C-S-B>', mode = { 'n' },      set_cond_breakpoint,   desc = 'conditional breakpoint' },
+        { '<M-C-c>',   mode = { 'n', 'i' }, dap.continue,          desc = 'step over [debug]' },
+        { '<M-C-l>',   mode = { 'n', 'i' }, dap.step_into,         desc = 'step out [debug]' },
+        { '<M-C-s>',   mode = { 'n', 'i' }, dap.close,             desc = 'stop [debug]' },
+        { '<M-C-e>',   mode = { 'n', 'v' }, dapui_eval_expr,       desc = 'evaluate expression' },
+        { '<M-C-r>',   mode = { 'n' },      dap.run_last,          desc = 'rerun last debug config' },
     },
     config = function()
-        local dap = require('dap')
-        local mreg = require('mason-registry')
-        mreg.refresh(function()
-            local function dap_path(name)
-                local pkg = mreg.get_package(name)
-                if not pkg then return nil end
-                return pkg:get_install_path()
-            end
-
-            local debugpy_path = dap_path('debugpy')
-            if debugpy_path then
-                local python_executable = debugpy_path .. '/venv/bin/python' -- Standard path in mason package
-                if vim.fn.executable(python_executable) then
-                    dap.adapters.python = {
-                        type = 'executable',
-                        command = python_executable,
-                        args = { '-m', 'debugpy.adapter' },
-                    }
-                else
-                    vim.notify("nvim-dap: Could not find python executable for debugpy in Mason package.",
-                        vim.log.levels.WARN)
-                end
-            end
-        end)
-
-        dap.configurations.python = {
-            {
-                type = 'python',
-                request = 'launch',
-                name = 'Launch file',
-                program = '${file}',     -- Debug the currently open file
-                --pythonPath = function()
-                ---- Function to optionally determine the python path, e.g., check for virtualenvs
-                ---- If mason-nvim-dap installs debugpy, it often handles this.
-                ---- You might need to customize this based on your project structure.
-                ---- Example: Check for a venv activate script
-                --local venv = vim.fn.findfile('pyproject.toml', vim.fn.getcwd() .. ';')
-                --if venv ~= '' then
-                --local venv_path = vim.fn.fnamemodify(venv, ':h') .. '/.venv/bin/python'
-                --if vim.fn.executable(venv_path) == 1 then
-                --return venv_path
-                --end
-                --end
-                ---- Fallback or default python
-                --return '/usr/bin/python3' -- Adjust if needed
-                --end,
-            },
-        }
-
+        -- Note: Adapter and configuration for python is handled by nvim-dap-python
+        vim.fn.sign_define('DapBreakpoint',
+            { text = '●', texthl = 'DapBreakpoint' })
+        vim.fn.sign_define('DapBreakpointCondition',
+            { text = '⊙', texthl = 'DapBreakpointCondition' })
+        vim.fn.sign_define('DapLogPoint',
+            { text = '○', texthl = 'DapLogPoint' })
     end,
 }
