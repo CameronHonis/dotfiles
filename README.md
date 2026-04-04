@@ -1,11 +1,8 @@
 # Welcome to my dotfiles
 
-blah blah blah
+perfection is not something you will find here
 
 ## Steps to install
 ```bash
-cd $HOME &&
-git init &&
-git remote add origin git@github.com/CameronHonis/dotfiles.git &&
-git pull origin main
+wget -qO- https://raw.githubusercontent.com/CameronHonis/dotfiles/main/bootstrap.sh | bash
 ```
