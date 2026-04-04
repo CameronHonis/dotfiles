@@ -7,10 +7,12 @@ ibus-table-cangjie*
 bsdutils
 dash
 diffutils
+discord
 displaylink-driver
 dkms
 efibootmgr
 findutils
+google-chrome-stable
 grep
 gzip
 hostname

@@ -1,11 +1,12 @@
-balena-etcher
 base-passwd
 curl
 fonts-crosextra-carlito
 fonts-indic
 fonts-noto-color-emoji
 gcc-14-base
-google-chrome-stable
+git
+login
 mongodb-org
 network-manager-openvpn-gnome
 openssh-server
+python3-netifaces
