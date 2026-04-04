@@ -14,6 +14,12 @@ esac
 
 cd "$(dirname "$0")"
 
+# install nix first
+bash base/nix.sh
+
+# install flake to user profile
+nix profile install "$HOME/.config/nix#"
+
 if [ "$skip_apt" != "true" ]; then
   ./base/apply_keys.sh -y
   ./base/apply_sources.sh -y
@@ -23,7 +29,7 @@ fi
 
 # custom setup
 for script in custom/*.sh; do
-    sh "$script"
+    bash "$script"
 done
 
 # set cron job to sync local packages with remote `manual_packages.txt`
