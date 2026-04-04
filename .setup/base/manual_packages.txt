@@ -1,5 +1,5 @@
+balena-etcher
 base-passwd
-discord
 displaylink-driver
 fonts-crosextra-carlito
 fonts-indic
