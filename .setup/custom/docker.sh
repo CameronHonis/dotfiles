@@ -3,6 +3,12 @@
 # Determine the real user
 REAL_USER=$(whoami)
 
+# Prevent running more than once by checking system state
+if [ -f /etc/systemd/system/docker.service ] && id -nG "$REAL_USER" 2>/dev/null | grep -qw docker; then
+    echo "Docker setup has already been completed. Skipping."
+    exit 0
+fi
+
 # 1. Find the dockerd binary installed by Nix
 DOCKERD_BIN=$(which dockerd 2>/dev/null)
 if [ -z "$DOCKERD_BIN" ]; then

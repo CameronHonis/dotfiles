@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+trap 'echo "Error: discord.sh failed at line $LINENO - command: $BASH_COMMAND"; exit 1' ERR
 
 if command -v discord &>/dev/null; then
   echo "Discord is already installed."
