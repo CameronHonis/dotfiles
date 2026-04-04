@@ -1,11 +1,11 @@
 balena-etcher
 base-passwd
-displaylink-driver
+curl
 fonts-crosextra-carlito
 fonts-indic
 fonts-noto-color-emoji
+gcc-14-base
 google-chrome-stable
 mongodb-org
 network-manager-openvpn-gnome
-packettracer
-proton-vpn-gnome-desktop
+openssh-server

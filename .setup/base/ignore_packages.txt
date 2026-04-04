@@ -7,6 +7,7 @@ ibus-table-cangjie*
 bsdutils
 dash
 diffutils
+displaylink-driver
 dkms
 efibootmgr
 findutils
