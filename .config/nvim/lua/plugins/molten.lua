@@ -35,8 +35,21 @@ return {
     "benlubas/molten-nvim",
     commit = "4fd7be6a12b5efda5179db642f13bad60893acca",
     dependencies = { "folke/snacks.nvim" },
-    build = ":UpdateRemotePlugins",
     init = function()
+        -- Run UpdateRemotePlugins on every startup so remote plugins are always registered.
+        -- This is idempotent and fast, and avoids the "first install" issue where build runs
+        -- before the plugin is fully registered in the runtime path.
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "VeryLazy",
+            once = true,
+            callback = function()
+                vim.cmd("UpdateRemotePlugins")
+                local rplugin = vim.fn.stdpath("data") .. "/rplugin.vim"
+                if vim.uv.fs_stat(rplugin) then
+                    vim.cmd("source " .. rplugin)
+                end
+            end,
+        })
         vim.g.molten_image_provider = "snacks.nvim"
         vim.g.molten_output_win_max_height = 20
         vim.g.molten_auto_open_output = false

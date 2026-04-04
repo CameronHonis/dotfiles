@@ -6,6 +6,17 @@ local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 
 local venv_path = vim.fn.stdpath('config') .. '/python/.venv/bin'
 
+-- Ensure the nvim python venv is synced before setting python3_host_prog
+if not vim.uv.fs_stat(venv_path .. '/python3') then
+    print('Syncing nvim python venv with uv...')
+    vim.fn.system({
+        'uv',
+        'sync',
+        '--project', vim.fn.stdpath('config') .. '/python',
+    })
+    print('Done.')
+end
+
 vim.g.python3_host_prog = venv_path .. '/python3'
 
 --- @type {fs_stat: fun(path: string): [number, nil] | [nil, string]} uv
