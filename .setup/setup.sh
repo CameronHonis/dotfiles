@@ -18,7 +18,7 @@ cd "$(dirname "$0")"
 bash base/nix.sh
 
 # install flake to user profile
-nix profile install "$HOME/.config/nix#"
+nix profile add "$HOME/.config/nix#"
 
 if [ "$skip_apt" != "true" ]; then
   ./base/apply_keys.sh -y
