@@ -1,41 +1,40 @@
 #!/bin/bash
-# Ensure the script is run with sudo
-if [ "$EUID" -ne 0 ]; then 
-  echo "Please run as root (use sudo)"
-  exit 1
-fi
 
-# 1. Determine the real user (who called sudo)
-REAL_USER=${SUDO_USER:-$(whoami)}
-REAL_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)
+# Determine the real user
+REAL_USER=$(whoami)
 
-# 2. Find the dockerd binary installed by Nix
-# We check the user's nix profile first, then the default system profile
-DOCKERD_BIN=$(su - "$REAL_USER" -c "which dockerd")
+# 1. Find the dockerd binary installed by Nix
+DOCKERD_BIN=$(which dockerd 2>/dev/null)
 if [ -z "$DOCKERD_BIN" ]; then
-    echo "Error: dockerd not found in $REAL_USER's PATH."
+    echo "Error: dockerd not found in PATH."
     echo "Make sure you installed docker via nix-env or home-manager."
     exit 1
 fi
 echo "Found dockerd at: $DOCKERD_BIN"
 
-# 3. Create the docker group if it doesn't exist
+# 2. Create the docker group if it doesn't exist
 if getent group docker >/dev/null; then
     echo "Group 'docker' already exists."
 else
-    groupadd docker
+    echo "Creating 'docker' group (requires sudo)..."
+    sudo groupadd docker
     echo "Group 'docker' created."
 fi
 
-# 4. Add the user to the docker group
-usermod -aG docker "$REAL_USER"
-echo "User '$REAL_USER' added to 'docker' group."
+# 3. Add the user to the docker group
+if id -nG "$REAL_USER" 2>/dev/null | grep -qw docker; then
+    echo "User '$REAL_USER' is already in the 'docker' group."
+else
+    echo "Adding user '$REAL_USER' to 'docker' group (requires sudo)..."
+    sudo usermod -aG docker "$REAL_USER"
+    echo "User '$REAL_USER' added to 'docker' group."
+fi
 
-# 5. Create the Systemd Service file
+# 4. Create the Systemd Service file
 SERVICE_FILE="/etc/systemd/system/docker.service"
-if [ -z "$SERVICE_FILE" ]; then
-    echo "Creating $SERVICE_FILE..."
-    cat <<EOF > $SERVICE_FILE
+if [ ! -f "$SERVICE_FILE" ]; then
+    echo "Creating $SERVICE_FILE (requires sudo)..."
+    sudo bash -c "cat <<EOF > $SERVICE_FILE
 [Unit]
 Description=Docker Application Container Engine (Nix)
 After=network-online.target
@@ -52,15 +51,17 @@ KillMode=process
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
-EOF
+EOF"
 
-    echo "Reloading systemd and starting docker..."
-    systemctl daemon-reload
-    systemctl enable docker
-    systemctl restart docker
+    echo "Reloading systemd and starting docker (requires sudo)..."
+    sudo systemctl daemon-reload
+    sudo systemctl enable docker
+    sudo systemctl restart docker
+else
+    echo "Service file $SERVICE_FILE already exists, skipping."
 fi
 
-# 6. Reload and Start
+# 5. Done
 echo "-------------------------------------------------------"
 echo "SUCCESS!"
 echo "1. The Docker daemon is now running as a system service."
