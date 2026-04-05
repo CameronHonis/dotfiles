@@ -9,6 +9,25 @@ local OPENROUTER_ADAPTERS = {
 
 local DEFAULT_ADAPTER = '[openrouter] gemini 3 flash preview'
 
+local function get_openrouter_key()
+    local key = os.getenv('OPENROUTER_API_KEY')
+    if key then
+        return key
+    end
+
+    local env_file = vim.fn.expand('$HOME/.env')
+    if vim.fn.filereadable(env_file) == 1 then
+        for line in io.lines(env_file) do
+            local match = line:match('^OPENROUTER_API_KEY=(.+)$')
+            if match then
+                return match:gsub("^['\"]+", ''):gsub("['\"]+$", '')
+            end
+        end
+    end
+
+    return nil
+end
+
 return {
     'olimorris/codecompanion.nvim',
     version = 'v18.*',
@@ -20,7 +39,11 @@ return {
     config = function()
         local make_openrouter_adapter = function(model_tag)
             return function()
-                local openrouter_key = os.getenv('OPENROUTER_API_KEY')
+                local openrouter_key = get_openrouter_key()
+                if not openrouter_key then
+                    vim.notify('no OPENROUTER_API_KEY found in current env or $HOME/.env', vim.log.levels.WARN)
+                end
+
                 return require('codecompanion.adapters').extend('openai_compatible', {
                     env = {
                         url = 'https://openrouter.ai/api',
