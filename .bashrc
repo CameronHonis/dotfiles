@@ -168,8 +168,6 @@ if [ -f "$HOME/.env" ]; then
     load_dotenv "$HOME/.env"
 fi
 
-export PATH="$PATH:/opt/nvim"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -179,6 +177,6 @@ alias copytoclip='xclip -selection clipboard < '
 export VCPKG_ROOT="$HOME/.local/share/vcpkg" # Or your chosen location
 export PATH="$VCPKG_ROOT:$PATH"
 
-export EDITOR="nvim"
+export EDITOR=nvim
 
 alias gitdiff='git diff --no-index'
