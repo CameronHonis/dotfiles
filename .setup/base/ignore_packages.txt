@@ -1,10 +1,7 @@
-grub*
-lib*
 *ubuntu*
 *nvidia*
-language-pack-*
-ibus-table-cangjie*
 bsdutils
+balena-etcher
 dash
 diffutils
 discord
@@ -14,9 +11,13 @@ efibootmgr
 findutils
 google-chrome-stable
 grep
+grub*
 gzip
 hostname
+ibus-table-cangjie*
+language-pack-*
 init
+lib*
 linux-generic-hwe*
 m17n-db
 ncurses*
