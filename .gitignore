@@ -16,6 +16,8 @@
 .config/nvim/lazy-lock.json
 
 !.config/tmux/
+.config/tmux/plugins
+
 !.config/kitty/
 !.config/git/
 
