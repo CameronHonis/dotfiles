@@ -19,7 +19,7 @@ local LUALS_CONFIG = {
     },
 }
 
-local PYRIGHT_CONFIG = {
+local BASEDPYRIGHT_CONFIG = {
     settings = {
         python = {
             analysis = {
@@ -39,6 +39,7 @@ return {
     },
     config = function()
         require('mason-lspconfig').setup({
+            ensure_installed = { 'basedpyright' },
             handlers = {
                 function(server_name)
                     local config = {
@@ -46,8 +47,8 @@ return {
                     }
                     if server_name == 'lua_ls' then
                         config = vim.tbl_extend('force', config, LUALS_CONFIG)
-                    elseif server_name == 'pyright' then
-                        config = vim.tbl_extend('force', config, PYRIGHT_CONFIG)
+                    elseif server_name == 'basedpyright' then
+                        config = vim.tbl_extend('force', config, BASEDPYRIGHT_CONFIG)
                     end
 
                     require('lspconfig')[server_name].setup(config)

@@ -24,7 +24,7 @@ return {
             'lemminx', -- xml
             'lua-language-server',
             'markdown-oxide',
-            'pyright',
+            'basedpyright',
             'sqlls',
             'tailwindcss-language-server',
             'typescript-language-server',
