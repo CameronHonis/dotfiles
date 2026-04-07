@@ -20,9 +20,32 @@ return {
     },
     config = function()
         local fb_actions = require 'telescope'.extensions.file_browser.actions
+        local actions = require "telescope.actions"
+        local action_state = require "telescope.actions.state"
+
+        local function preview_scroll(lines)
+            return function(prompt_bufnr)
+                local picker = action_state.get_current_picker(prompt_bufnr)
+                local previewer = picker and picker.previewer
+                if previewer and previewer.scroll_fn then
+                    previewer:scroll_fn(lines)
+                end
+            end
+        end
+
         require('telescope').setup {
             defaults = {
                 initial_mode = "insert",
+                mappings = {
+                    i = {
+                        ["<S-J>"] = preview_scroll(2),
+                        ["<S-K>"] = preview_scroll(-2),
+                    },
+                    n = {
+                        ["<S-J>"] = preview_scroll(2),
+                        ["<S-K>"] = preview_scroll(-2),
+                    },
+                },
             },
             pickers = {
                 find_files = {
