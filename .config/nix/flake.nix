@@ -18,14 +18,16 @@
         name = "user-profile";
         paths = with pkgs; [
         anki-bin
-        bzip3
+        bat
         black
         bottom
+        bzip3
 		cmake
 		docker
         dolt
         fd
 		ffmpeg
+        lazydocker
         lazygit
 		libclang
         libffi
