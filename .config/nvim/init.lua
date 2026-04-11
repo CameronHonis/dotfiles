@@ -58,9 +58,7 @@ vim.opt.laststatus = 3
 vim.opt.signcolumn = 'auto:2'
 
 vim.opt.foldenable = true
-vim.opt.foldmethod = "expr"
-vim.opt.foldenable = false  -- Optional: start with folds closed
-vim.opt.foldlevelstart = 99 -- Optional: start with folds open
+vim.opt.foldlevelstart = 99
 
 vim.wo.number = true
 vim.wo.relativenumber = true
