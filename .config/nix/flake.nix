@@ -62,6 +62,7 @@
         pyenv
 		python315
 		redis
+        redocly
 		ripgrep
         rustup
 		samba
