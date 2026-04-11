@@ -30,8 +30,18 @@ return {
     version = 'v1.*',
     dependencies = {
         'williamboman/mason.nvim',
+        'b0o/schemastore.nvim',
     },
     config = function()
+        local JSONLS = {
+            settings = {
+                json = {
+                    schemas = require("schemastore").json.schemas(),
+                    validate = { enable = true },
+                },
+            },
+        }
+
         require('mason-lspconfig').setup({
             handlers = {
                 function(server_name)
@@ -41,6 +51,8 @@ return {
                     }
                     if server_name == 'lua_ls' then
                         config = vim.tbl_extend('force', config, LUALS_CONFIG)
+                    elseif server_name == 'jsonls' then
+                        config = vim.tbl_extend('force', config, JSONLS)
                     end
 
                     require('lspconfig')[server_name].setup(config)
