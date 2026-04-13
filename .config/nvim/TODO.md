@@ -1,5 +1,6 @@
 # TODO
 ## Easy
+- [ ] swap keybinds to `which-key.nvim`
 - [ ] allow GitRevert to work in selection only
 - [ ] fix 'Capture' util
 - [ ] add remote syncing
