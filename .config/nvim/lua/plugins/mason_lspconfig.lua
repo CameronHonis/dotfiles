@@ -47,7 +47,7 @@ return {
                 function(server_name)
                     local config = {
                         root_dir = vim.fn.getcwd(),
-                        capabilities = capabilities,
+                        capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
                     }
                     if server_name == 'lua_ls' then
                         config = vim.tbl_extend('force', config, LUALS_CONFIG)
