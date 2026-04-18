@@ -3,7 +3,19 @@ return {
     version = 'v4.*',
     dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
     keys = {
-        { '<M-C-Space>', mode = { 'n', 'i' }, function() pcall(require('dapui').toggle) end, desc = 'close debug ui' },
+        {
+            '<M-C-Space>',
+            mode = { 'n', 'i' },
+            function()
+                local dap = require('dap')
+                if dap.session() then
+                    require('dapui').toggle()
+                else
+                    vim.notify("No active debug session", vim.log.levels.INFO)
+                end
+            end,
+            desc = 'toggle debug ui'
+        },
     },
     config = function()
         local dap = require('dap')
@@ -78,6 +90,18 @@ return {
             dapui.close()
         end
         dap.listeners.before.event_exited.dapui_config = function()
+            dapui.close()
+        end
+        dap.listeners.after.event_terminated.dapui_config = function()
+            dapui.close()
+        end
+        dap.listeners.after.event_exited.dapui_config = function()
+            dapui.close()
+        end
+        dap.listeners.before.disconnect.dapui_config = function()
+            dapui.close()
+        end
+        dap.listeners.after.disconnect.dapui_config = function()
             dapui.close()
         end
     end

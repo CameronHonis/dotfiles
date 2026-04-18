@@ -13,10 +13,9 @@
 - [ ] utilize nvim **line wrapping** but modify nav controls to respect line wraps
 - [ ] **live** update of diff in status bar (from buffer not file)
 - [ ] **disable auto-insert comment** symbol on new line
-- [ ] commenting in .md files instead toggles cross-out decoration (what?)
+- [ ] commenting in .md files instead renders as strike-through (what?)
 
 ## Medium
-- [ ] fix `black` formatter
 - [ ] add treesitter nav jumps (including jupiter nb)
 - [ ] file search and file browser should have "**show hidden files**" state
 - [ ] ripgrep search in **regex & literal** mode
@@ -25,7 +24,6 @@
 - [ ] create snippets
 
 ## Hard
-- [ ] add davidxy/vectorcode to codecompanion llms (unless ACP is good enough)
 - [ ] ONGOING: create **debug/run** configs
 
 # to try:

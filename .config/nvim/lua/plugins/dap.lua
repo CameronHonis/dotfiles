@@ -18,7 +18,7 @@ return {
         { '<M-C-S-B>', mode = { 'n' },      set_cond_breakpoint,   desc = 'conditional breakpoint' },
         { '<M-C-c>',   mode = { 'n', 'i' }, dap.continue,          desc = 'step over [debug]' },
         { '<M-C-l>',   mode = { 'n', 'i' }, dap.step_into,         desc = 'step out [debug]' },
-        { '<M-C-s>',   mode = { 'n', 'i' }, dap.close,             desc = 'stop [debug]' },
+        { '<M-C-s>',   mode = { 'n', 'i' }, dap.terminate,         desc = 'terminate [debug]' },
         { '<M-C-e>',   mode = { 'n', 'v' }, dapui_eval_expr,       desc = 'evaluate expression' },
         { '<M-C-r>',   mode = { 'n' },      dap.run_last,          desc = 'rerun last debug config' },
     },
