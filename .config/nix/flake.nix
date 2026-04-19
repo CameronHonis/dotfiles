@@ -58,7 +58,6 @@
         pipx
         postgresql
         protobuf
-        protonvpn-gui
         pyenv
 		python315
 		redis
@@ -71,7 +70,7 @@
         tectonic
         testdisk
         tree-sitter
-        unixODBC
+        unixodbc
         util-linux
         uv
         vcpkg
