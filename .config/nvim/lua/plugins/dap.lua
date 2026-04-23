@@ -19,7 +19,7 @@ return {
         { '<M-C-c>',   mode = { 'n', 'i' }, dap.continue,          desc = 'start/manage debug runtime' },
         { '<M-C-j>',   mode = { 'n', 'i' }, dap.step_into,         desc = 'step into [debug]' },
         { '<M-C-l>',   mode = { 'n', 'i' }, dap.step_over,         desc = 'step over [debug]' },
-        { '<M-C-k>',   mode = { 'n', 'i' }, dap.step_out,         desc = 'step out [debug]' },
+        { '<M-C-k>',   mode = { 'n', 'i' }, dap.step_out,          desc = 'step out [debug]' },
         { '<M-C-h>',   mode = { 'n', 'v' }, dapui_eval_expr,       desc = 'evaluate expression' },
         { '<M-C-r>',   mode = { 'n' },      dap.run_last,          desc = 'rerun last debug config' },
         {
@@ -60,6 +60,19 @@ return {
 
         dap.listeners.before.event_terminated.dap_repl_autoclose = close_repl_if_open
         dap.listeners.before.event_exited.dap_repl_autoclose     = close_repl_if_open
-        dap.listeners.before.disconnect.dap_repl_autoclose        = close_repl_if_open
+        dap.listeners.before.disconnect.dap_repl_autoclose       = close_repl_if_open
+
+        vim.keymap.set('n', '<M-C-e>', function()
+            local dap = require('dap')
+            if vim.g.exception_breakpoints_enabled then
+                dap.set_exception_breakpoints({})
+                vim.g.exception_breakpoints_enabled = false
+                vim.notify("Exception breakpoints disabled", vim.log.levels.INFO)
+            else
+                dap.set_exception_breakpoints({ 'raised', 'uncaught' })
+                vim.g.exception_breakpoints_enabled = true
+                vim.notify("Break on exceptions: raised, uncaught", vim.log.levels.INFO)
+            end
+        end, { desc = 'toggle exception breakpoints' })
     end,
 }
