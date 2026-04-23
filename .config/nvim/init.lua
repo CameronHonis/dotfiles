@@ -1,10 +1,14 @@
+local venv_path = vim.fn.stdpath('config') .. '/python/.venv/bin'
+vim.g.python3_host_prog = venv_path .. '/python3'
+-- Neovim 0.12+ might set this to 0 early, disabling the provider.
+-- Unsetting it allows the provider to load correctly with the host_prog set above.
+vim.g.loaded_python3_provider = nil
+
 require('colors')
 local diagnostics = require('utils.diagnostics')
 require('utils.dotenv').load_dotenv({ file_path = vim.fn.stdpath('config') .. '/.env' })
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-
-local venv_path = vim.fn.stdpath('config') .. '/python/.venv/bin'
 
 --- @type {fs_stat: fun(path: string): [number, nil] | [nil, string]} uv
 local uv = vim.uv or vim.loop
@@ -19,8 +23,6 @@ if not uv.fs_stat(venv_path .. '/python3') then
     })
     print('Done.')
 end
-
-vim.g.python3_host_prog = venv_path .. '/python3'
 
 vim.g.mapleader = " "
 
@@ -68,14 +70,21 @@ vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
 vim.cmd [[ highlight ColorColumn guibg=#151820 ]]
 vim.opt.colorcolumn = "80" -- Set the desired color column position
 
--- move me to syntax_colors.lua
 vim.diagnostic.config({
     virtual_text = true,
-    severity_sort = true,     -- Sort diagnostics by severity (errors first)
+    severity_sort = true,
     float = {
-        severity_sort = true, -- Sort errors first in floating windows too
+        severity_sort = true,
+        border = 'rounded',  -- optional: nicer border
+        source = 'if_many',  -- show source when multiple sources
     },
     signs = true,
+})
+-- Show diagnostics in floating window on cursor hold
+vim.api.nvim_create_autocmd('CursorHold', {
+    callback = function()
+        vim.diagnostic.open_float({ scope = 'cursor', focusable = false })
+    end,
 })
 
 -- nops
@@ -109,6 +118,9 @@ vim.api.nvim_create_user_command('GitRestore', require('utils.git_restore'),
 
 -- terminal navigation toggle
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+
+
+vim.keymap.set('n', '<leader>te', ':term', { noremap = true, silent = true })
 
 -- set help buffers to be resizable using hotkeys
 vim.api.nvim_create_autocmd("FileType", {
@@ -149,3 +161,5 @@ vim.keymap.set({'i', 'n', 't'}, '<C-w>k', [[<C-\><C-n><C-w>k]], { noremap = true
 vim.keymap.set({'i', 'n', 't'}, '<C-w>l', [[<C-\><C-n><C-w>l]], { noremap = true, silent = true })
 
 vim.api.nvim_create_user_command('Capture', require('utils.capture'), { nargs = '+', desc = 'capture command output and send to a scratch buffer' })
+
+vim.opt.updatetime = 1000

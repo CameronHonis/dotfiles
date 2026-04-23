@@ -16,6 +16,7 @@
 - [ ] commenting in .md files instead renders as strike-through (what?)
 
 ## Medium
+- [ ] rework debug flow
 - [ ] add treesitter nav jumps (including jupiter nb)
 - [ ] file search and file browser should have "**show hidden files**" state
 - [ ] ripgrep search in **regex & literal** mode
