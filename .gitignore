@@ -28,3 +28,4 @@
 !.jupyter/
 .jupyter/lab/workspaces/
 
+!.setup/
