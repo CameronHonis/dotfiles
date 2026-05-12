@@ -10,4 +10,4 @@ fi
 
 sudo ln -sf "$HOME/.config/nixos" /etc/nixos
 
-sudo nixos-rebuild switch --flake /etc/nixos/
+sudo nixos-rebuild switch --flake /etc/nixos/#rook
