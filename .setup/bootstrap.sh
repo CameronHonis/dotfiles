@@ -1,5 +1,3 @@
-#!/bin/bash
-
 set -e
 
 REPO="https://github.com/CameronHonis/dotfiles.git"
