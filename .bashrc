@@ -132,17 +132,6 @@ export PATH="$PATH:/lib/lua-5.4.6/src"
 export PATH="$PATH:/usr/lib/poetry/bin"
 export TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
-sudo_nvim_with_config() {
-    if [ "$1" = "nvim" ]; then
-        shift
-        command sudo -E nvim -u "$HOME/.config/nvim/init.lua" "$@"
-    else
-        command sudo "$@"
-    fi
-}
-
-alias sudo=sudo_nvim_with_config
-
 # Load environment variables from .env file
 function load_dotenv() {
     local env_file="${1:-.env}"
@@ -171,7 +160,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-alias copytoclip='xclip -selection clipboard < '
 # Vcpkg setup
 export VCPKG_ROOT="$HOME/.local/share/vcpkg" # Or your chosen location
 export PATH="$VCPKG_ROOT:$PATH"
@@ -179,3 +167,5 @@ export PATH="$VCPKG_ROOT:$PATH"
 export EDITOR=nvim
 
 alias gitdiff='git diff --no-index'
+
+alias nrs='sudo nixos-rebuild switch --flake /etc/nixos'

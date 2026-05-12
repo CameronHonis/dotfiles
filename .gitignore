@@ -21,18 +21,10 @@
 !.config/kitty/
 !.config/git/
 
-!.config/nix/
-
-!.setup/
-
-!.local/
-.local/*
-!.local/share/
-.local/share/*
-!.local/share/fonts/
-!.local/share/fonts/**
-
 !.config/opencode/
+
+!.config/nixos/
 
 !.jupyter/
 .jupyter/lab/workspaces/
+
