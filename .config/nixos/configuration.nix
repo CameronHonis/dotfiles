@@ -10,10 +10,8 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
-  boot.loader.grub.useOSProber = true;
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;
 
   # Drivers
   hardware.nvidia = {
@@ -137,8 +135,8 @@
     lazygit
     libclang
     libffi
-    libgcc
     libllvm
+    gcc
     gimp
     git
     gnupg
