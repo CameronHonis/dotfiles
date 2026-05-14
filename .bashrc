@@ -169,3 +169,5 @@ export EDITOR=nvim
 alias gitdiff='git diff --no-index'
 
 alias nrs='sudo nixos-rebuild switch --flake /etc/nixos'
+
+alias opencode='[ -f .env ] && set -a && source .env && set +a; command opencode'
