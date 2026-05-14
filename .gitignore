@@ -24,7 +24,6 @@
 !.config/opencode/
 
 !.config/nixos/
-.config/nixos/hardware*
 
 !.jupyter/
 .jupyter/lab/workspaces/
