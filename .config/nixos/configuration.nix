@@ -131,11 +131,6 @@
     fd
     ffmpeg
     file
-    lazydocker
-    lazygit
-    libclang
-    libffi
-    libllvm
     gcc
     gimp
     git
@@ -150,6 +145,11 @@
 	kitty
     kubectl
     maven
+    lazydocker
+    lazygit
+    libclang
+    libffi
+    libllvm
     neovim
     net-tools
     nfs-utils
