@@ -91,6 +91,9 @@
           lock-enabled = false;
           idle-activation-enabled = false;
         };
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+        };
       };
     }];
   };
