@@ -86,6 +86,11 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # Swap file
+  swapDevices = [
+    { device = "/var/lib/swapfile"; size = 32768; }
+  ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.camer = {
     isNormalUser = true;
