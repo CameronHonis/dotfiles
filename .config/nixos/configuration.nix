@@ -58,6 +58,43 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  # Disable all sleep, suspend, hibernate, and screen blanking
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleSuspendKey = "ignore";
+    HandleHibernateKey = "ignore";
+    IdleAction = "ignore";
+  };
+
+  # GNOME-level idle/power settings (applied system-wide via dconf)
+  programs.dconf = {
+    enable = true;
+    profiles.user.databases = [{
+      settings = {
+        "org/gnome/desktop/session" = {
+          idle-delay = pkgs.lib.gvariant.mkUint32 0;
+        };
+        "org/gnome/settings-daemon/plugins/power" = {
+          sleep-inactive-ac-type = "nothing";
+          sleep-inactive-battery-type = "nothing";
+          idle-dim = false;
+          power-button-action = "nothing";
+        };
+        "org/gnome/desktop/screensaver" = {
+          lock-enabled = false;
+          idle-activation-enabled = false;
+        };
+      };
+    }];
+  };
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -112,9 +149,9 @@
   # Overlays
   nixpkgs.overlays = [
     (final: prev: {
-      neovim = nixpkgs-unstable.legacyPackages.${prev.system}.neovim;
-      tree-sitter = nixpkgs-unstable.legacyPackages.${prev.system}.tree-sitter;
-      beads = nixpkgs-unstable.legacyPackages.${prev.system}.beads;
+      neovim = nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.neovim;
+      tree-sitter = nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.tree-sitter;
+      beads = nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.beads;
     })
   ];
 
