@@ -23,6 +23,7 @@ return {
             'json-lsp',
             'lemminx', -- xml
             'lua-language-server',
+            'luau-lsp',
             'markdown-oxide',
             'basedpyright',
             'sqlls',
