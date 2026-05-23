@@ -213,6 +213,7 @@
     redis
     redocly
     ripgrep
+    rojo
     rustup
     samba
     screenfetch
