@@ -217,6 +217,7 @@
     rustup
     samba
     screenfetch
+    stylua
     tmux
     tectonic
     testdisk
