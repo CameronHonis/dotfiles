@@ -214,11 +214,12 @@
     redis
     redocly
     ripgrep
-    rojo
+    rojo # roblox studio sync server
     rustup
     samba
     screenfetch
-    stylua
+    selene # linter for lua / luau
+    stylua # formatter for lua / luau
     tmux
     tectonic
     testdisk
