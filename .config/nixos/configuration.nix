@@ -230,6 +230,7 @@
     vcpkg
     vim
     vinegar
+    wally
     wget
     wireshark
     xclip
