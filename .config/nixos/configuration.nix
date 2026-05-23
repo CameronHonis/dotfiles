@@ -187,6 +187,7 @@
     htop
     imagemagick
     iperf
+    isort
 	kitty
     kubectl
     maven
