@@ -61,6 +61,11 @@ return {
                                 },
                             },
                         }
+                        config.cmd = {
+                            vim.fn.exepath('luau-lsp'),
+                            'lsp',
+                            '--definitions=@testez=testez.d.luau',
+                        }
                     end
 
                     require('lspconfig')[server_name].setup(config)
