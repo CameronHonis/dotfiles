@@ -170,6 +170,7 @@
     bzip3
     caligula
     cmake
+    desktop-file-utils
     discord
     docker
     dolt
@@ -251,6 +252,13 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  services.flatpak = {
+    enable = true;
+    packages = [
+      { appId = "org.vinegarhq.Sober"; origin = "flathub"; }
+    ];
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -270,4 +278,13 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.variables.TERMINAL = "kitty";
+
+  environment.etc."xdg/applications/sober.desktop".text = ''
+    [Desktop Entry]
+    Name=Sober
+    Exec=flatpak run org.vinegarhq.Sober
+    Type=Application
+    Categories=Game;
+    Terminal=false
+  '';
 }
