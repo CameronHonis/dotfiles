@@ -54,9 +54,13 @@ return {
                     elseif server_name == 'jsonls' then
                         config = vim.tbl_extend('force', config, JSONLS)
                     elseif server_name == 'luau_lsp' then
-                        config.on_attach = function(client, _)
-                            client.server_capabilities.diagnosticProvider = false
-                        end
+                        config.settings = {
+                            ["luau-lsp"] = {
+                                lint = {
+                                    enable = false,
+                                },
+                            },
+                        }
                     end
 
                     require('lspconfig')[server_name].setup(config)
