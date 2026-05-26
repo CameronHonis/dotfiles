@@ -155,6 +155,7 @@
       neovim = nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.neovim;
       tree-sitter = nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.tree-sitter;
       beads = nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.beads;
+      run-in-roblox = final.callPackage ./run-in-roblox.nix {};
     })
   ];
 
@@ -216,6 +217,7 @@
     redocly
     ripgrep
     rojo # roblox studio sync server
+    run-in-roblox
     rustup
     samba
     screenfetch
