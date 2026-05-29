@@ -286,6 +286,11 @@
 
   environment.variables.TERMINAL = "kitty";
 
+  system.activationScripts.binbash = ''
+    mkdir -m 0755 -p /bin
+    ln -sfn ${pkgs.bash}/bin/bash /bin/bash
+  '';
+
   environment.etc."xdg/applications/sober.desktop".text = ''
     [Desktop Entry]
     Name=Sober
