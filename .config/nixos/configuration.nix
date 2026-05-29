@@ -166,6 +166,7 @@
     bat
     beads
     black
+    blender
     bottom
     busybox
     bzip3
