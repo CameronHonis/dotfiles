@@ -254,6 +254,11 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  services.pia = {
+    enable = true;
+    authUserPassFile = "/etc/nixos/pia-credentials";
+  };
+
   services.flatpak = {
     enable = true;
     packages = [
