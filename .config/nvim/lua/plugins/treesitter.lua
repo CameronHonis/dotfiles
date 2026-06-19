@@ -47,6 +47,7 @@ return {
             "json",
             "latex", --optional for render-markdown plugin
             "lua",
+            "luau",
             "make",
             "markdown",        --required for render-markdown plugin
             "markdown_inline", --required for render-markdown plugin
