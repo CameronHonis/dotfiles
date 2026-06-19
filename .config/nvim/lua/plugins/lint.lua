@@ -3,8 +3,8 @@ return {
     config = function()
         local lint = require('lint')
         lint.linters_by_ft = {
-            lua = { 'selene' },
-            luau = { 'selene' },
+            -- lua = { 'selene' },
+            -- luau = { 'selene' },
         }
 
         vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
