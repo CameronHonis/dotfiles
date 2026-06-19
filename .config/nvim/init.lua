@@ -68,6 +68,11 @@ vim.wo.relativenumber = true
 vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
 
 vim.cmd [[ highlight ColorColumn guibg=#151820 ]]
+vim.api.nvim_create_autocmd('FileType', {
+    callback = function()
+        vim.opt_local.formatoptions:remove({ 'r', 'o' })
+    end,
+})
 vim.opt.colorcolumn = "80" -- Set the desired color column position
 
 vim.diagnostic.config({
