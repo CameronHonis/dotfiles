@@ -17,5 +17,14 @@
 				./configuration.nix
 			];
 		};
+		nixosConfigurations.mercury = nixpkgs.lib.nixosSystem {
+			system = "x86_64-linux";
+            specialArgs = { inherit (inputs) nixpkgs-unstable; };
+			modules = [
+				nix-flatpak.nixosModules.nix-flatpak
+				pia.nixosModules."x86_64-linux".default
+				./mercury-configuration.nix
+			];
+		};
 	};
 }
