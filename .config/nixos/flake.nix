@@ -14,7 +14,7 @@
 			modules = [
 				nix-flatpak.nixosModules.nix-flatpak
 				pia.nixosModules."x86_64-linux".default
-				./configuration.nix
+				./rook-configuration.nix
 			];
 		};
 		nixosConfigurations.mercury = nixpkgs.lib.nixosSystem {
