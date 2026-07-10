@@ -150,7 +150,6 @@
     uv
     vcpkg
     vim
-    vinegar
     wally
     wget
     wireshark
@@ -170,6 +169,7 @@
     enable = true;
     packages = [
       { appId = "org.vinegarhq.Sober"; origin = "flathub"; }
+      { appId = "org.vinegarhq.Vinegar"; origin = "flathub"; }
     ];
   };
 
@@ -190,6 +190,15 @@
     [Desktop Entry]
     Name=Sober
     Exec=flatpak run org.vinegarhq.Sober
+    Type=Application
+    Categories=Game;
+    Terminal=false
+  '';
+
+  environment.etc."xdg/applications/vinegar.desktop".text = ''
+    [Desktop Entry]
+    Name=Vinegar
+    Exec=flatpak run org.vinegarhq.Vinegar
     Type=Application
     Categories=Game;
     Terminal=false
