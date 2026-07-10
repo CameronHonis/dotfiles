@@ -7,3 +7,8 @@
 	defaultBranch = main
 [submodule]
 	recurse = true
+[merge]
+	tool = nvim
+[mergetool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED
+	trustExitCode = true
