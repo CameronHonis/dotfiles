@@ -141,9 +141,10 @@
     screenfetch
     selene
     stylua
-    tmux
     tectonic
     testdisk
+    tmux
+    traceroute
     tree-sitter
     unixODBC
     util-linux
