@@ -1,5 +1,6 @@
 local function format()
-    require('conform').format({ bufnr = 0, lsp_fallback = true })
+    pcall(require('conform').format, { bufnr = 0, lsp_fallback = true })
+    require('mini.trailspace').trim()
 end
 
 return {
