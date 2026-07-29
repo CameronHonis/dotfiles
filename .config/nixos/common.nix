@@ -122,12 +122,14 @@
     nginx
     nmap
     nodejs_24
+    nssTools
     obs-studio
     opencode
+    opensc
     openssh
     os-prober
-    pipx
     postgresql
+    pcsc-tools
     protobuf
     pyenv
     python315
@@ -146,7 +148,7 @@
     tmux
     traceroute
     tree-sitter
-    unixODBC
+    unixodbc
     util-linux
     uv
     vcpkg
@@ -160,6 +162,8 @@
   ];
 
   services.openssh.enable = true;
+
+  services.pcscd.enable = true;
 
   services.pia = {
     enable = true;
