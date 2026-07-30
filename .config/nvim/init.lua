@@ -1,51 +1,52 @@
-local venv_path = vim.fn.stdpath('config') .. '/python/.venv/bin'
-vim.g.python3_host_prog = venv_path .. '/python3'
+local venv_path = vim.fn.stdpath("config") .. "/python/.venv/bin"
+vim.g.python3_host_prog = venv_path .. "/python3"
 -- Neovim 0.12+ might set this to 0 early, disabling the provider.
 -- Unsetting it allows the provider to load correctly with the host_prog set above.
 vim.g.loaded_python3_provider = nil
 
-require('colors')
-local diagnostics = require('utils.diagnostics')
-require('utils.dotenv').load_dotenv({ file_path = vim.fn.stdpath('config') .. '/.env' })
+require("colors")
+local diagnostics = require("utils.diagnostics")
+require("utils.dotenv").load_dotenv({ file_path = vim.fn.stdpath("config") .. "/.env" })
 
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 --- @type {fs_stat: fun(path: string): [number, nil] | [nil, string]} uv
 local uv = vim.uv or vim.loop
 
 -- Ensure the nvim python venv is synced before setting python3_host_prog
-if not uv.fs_stat(venv_path .. '/python3') then
-    print('Syncing nvim python venv with uv...')
-    vim.fn.system({
-        'uv',
-        'sync',
-        '--project', vim.fn.stdpath('config') .. '/python',
-    })
-    print('Done.')
+if not uv.fs_stat(venv_path .. "/python3") then
+	print("Syncing nvim python venv with uv...")
+	vim.fn.system({
+		"uv",
+		"sync",
+		"--project",
+		vim.fn.stdpath("config") .. "/python",
+	})
+	print("Done.")
 end
 
 vim.g.mapleader = " "
 
 -- Auto-install lazy.nvim if not present
 if not uv.fs_stat(lazypath) then
-    print('Installing lazy.nvim....')
-    vim.fn.system({
-        'git',
-        'clone',
-        '--filter=blob:none',
-        'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable', -- latest stable release
-        lazypath,
-    })
-    print('Done.')
+	print("Installing lazy.nvim....")
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+	print("Done.")
 end
 
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup('plugins', {
-    defaults = {
-        lazy = false,
-    }
+require("lazy").setup("plugins", {
+	defaults = {
+		lazy = false,
+	},
 })
 
 vim.opt.tabstop = 4
@@ -55,9 +56,9 @@ vim.opt.cursorline = true
 vim.opt.paste = false
 vim.opt.ignorecase = true
 vim.opt.swapfile = true
-vim.opt.directory = '.'
+vim.opt.directory = "."
 vim.opt.laststatus = 3
-vim.opt.signcolumn = 'auto:2'
+vim.opt.signcolumn = "auto:2"
 
 vim.opt.foldenable = true
 vim.opt.foldlevelstart = 99
@@ -65,39 +66,39 @@ vim.opt.foldlevelstart = 99
 vim.wo.number = true
 vim.wo.relativenumber = true
 
-vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
+vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
 
-vim.cmd [[ highlight ColorColumn guibg=#151820 ]]
-vim.api.nvim_create_autocmd('FileType', {
-    callback = function()
-        vim.opt_local.formatoptions:remove({ 'r', 'o' })
-    end,
+vim.cmd([[ highlight ColorColumn guibg=#151820 ]])
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function()
+		vim.opt_local.formatoptions:remove({ "r", "o" })
+	end,
 })
 vim.opt.colorcolumn = "80" -- Set the desired color column position
 
 vim.diagnostic.config({
-    virtual_text = true,
-    severity_sort = true,
-    float = {
-        severity_sort = true,
-        border = 'rounded',  -- optional: nicer border
-        source = 'if_many',  -- show source when multiple sources
-    },
-    signs = true,
+	virtual_text = true,
+	severity_sort = true,
+	float = {
+		severity_sort = true,
+		border = "rounded", -- optional: nicer border
+		source = "if_many", -- show source when multiple sources
+	},
+	signs = true,
 })
 -- Show diagnostics in floating window on cursor hold
-vim.api.nvim_create_autocmd('CursorHold', {
-    callback = function()
-        vim.diagnostic.open_float({ scope = 'cursor', focusable = false })
-    end,
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		vim.diagnostic.open_float({ scope = "cursor", focusable = false })
+	end,
 })
 
 -- nops
-vim.api.nvim_set_keymap('n', '<C-S-O>', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-S-O>", "<Nop>", { noremap = true, silent = true })
 
 -- forward/back nav
-vim.api.nvim_set_keymap('n', 'H', '<C-o>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'L', '<C-i>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "H", "<C-o>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "L", "<C-i>", { noremap = true, silent = true })
 
 -- more fine grained undo/redo
 vim.keymap.set("i", "<space>", "<space><c-g>u", { noremap = true })
@@ -107,64 +108,76 @@ vim.keymap.set("i", ";", ";<c-g>u", { noremap = true })
 vim.keymap.set("i", "<CR>", "<CR><c-g>u", { noremap = true })
 
 -- jump to diagnostics
-vim.keymap.set('n', '<C-j>', diagnostics.jump_to_next_diagnostic, { noremap = true, silent = true })
-vim.keymap.set('n', '<C-k>', diagnostics.jump_to_prev_diagnostic, { noremap = true, silent = true })
+vim.keymap.set("n", "<C-j>", diagnostics.jump_to_next_diagnostic, { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", diagnostics.jump_to_prev_diagnostic, { noremap = true, silent = true })
 
 -- switch to editing this config file
-vim.keymap.set('n', '<C-A-A>', function()
-    local path = vim.fn.expand('$MYVIMRC')
-    vim.cmd('edit ' .. path)
-    vim.cmd('lcd ' .. vim.fn.fnamemodify(path, ':h'))
+vim.keymap.set("n", "<C-A-A>", function()
+	local path = vim.fn.expand("$MYVIMRC")
+	vim.cmd("edit " .. path)
+	vim.cmd("lcd " .. vim.fn.fnamemodify(path, ":h"))
 end, { noremap = true, silent = true })
 
-vim.api.nvim_create_user_command('Rename', require('utils.rename_file'), { nargs = '?', complete = 'file' })
-vim.api.nvim_create_user_command('GitRestore', require('utils.git_restore'),
-    { desc = 'restore current file to git HEAD' })
+vim.api.nvim_create_user_command("Rename", require("utils.rename_file"), { nargs = "?", complete = "file" })
+vim.api.nvim_create_user_command(
+	"GitRestore",
+	require("utils.git_restore"),
+	{ desc = "restore current file to git HEAD" }
+)
 
 -- terminal navigation toggle
-vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 
-
-vim.keymap.set('n', '<leader>te', ':term', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>te", ":term", { noremap = true, silent = true })
 
 -- set help buffers to be resizable using hotkeys
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "help",
-    callback = function()
-        vim.cmd('wincmd L')
-        vim.opt_local.winfixwidth = false
-    end,
+	pattern = "help",
+	callback = function()
+		vim.cmd("wincmd L")
+		vim.opt_local.winfixwidth = false
+	end,
 })
 
-vim.api.nvim_create_user_command('IndentToggle', require('utils.indent_toggle'), {})
+vim.api.nvim_create_user_command("IndentToggle", require("utils.indent_toggle"), {})
 
 -- copy file name
-vim.keymap.set('n', '<leader>cf', function()
-    local filename = vim.fn.expand('%:t')
-    vim.fn.setreg('+', filename)
-    print("Copied filename: " .. filename)
+vim.keymap.set("n", "<leader>cf", function()
+	local filename = vim.fn.expand("%:t")
+	vim.fn.setreg("+", filename)
+	print("Copied filename: " .. filename)
 end, { desc = "Copy current filename to clipboard" })
 
 -- copy file path
-vim.keymap.set('n', '<leader>cp', function()
-    local filepath = vim.api.nvim_buf_get_name(0)
-    vim.fn.setreg('+', filepath)
-    print("Copied path: " .. filepath)
+vim.keymap.set("n", "<leader>cp", function()
+	local filepath = vim.api.nvim_buf_get_name(0)
+	vim.fn.setreg("+", filepath)
+	print("Copied path: " .. filepath)
 end, { desc = "Copy current file path to clipboard" })
 
 -- remove `gr` stall
-vim.keymap.del('n', 'gra')
-vim.keymap.del('n', 'grn')
-vim.keymap.del('n', 'grr')
-vim.keymap.del('n', 'gri')
-vim.keymap.del('n', 'grt')
+vim.keymap.del("n", "gra")
+vim.keymap.del("n", "grn")
+vim.keymap.del("n", "grr")
+vim.keymap.del("n", "gri")
+vim.keymap.del("n", "grt")
 
 -- enable jumping around regardless of the mode
-vim.keymap.set({'i', 'n', 't'}, '<C-w>h', [[<C-\><C-n><C-w>h]], { noremap = true, silent = true })
-vim.keymap.set({'i', 'n', 't'}, '<C-w>j', [[<C-\><C-n><C-w>j]], { noremap = true, silent = true })
-vim.keymap.set({'i', 'n', 't'}, '<C-w>k', [[<C-\><C-n><C-w>k]], { noremap = true, silent = true })
-vim.keymap.set({'i', 'n', 't'}, '<C-w>l', [[<C-\><C-n><C-w>l]], { noremap = true, silent = true })
+vim.keymap.set({ "i", "n", "t" }, "<C-w>h", [[<C-\><C-n><C-w>h]], { noremap = true, silent = true })
+vim.keymap.set({ "i", "n", "t" }, "<C-w>j", [[<C-\><C-n><C-w>j]], { noremap = true, silent = true })
+vim.keymap.set({ "i", "n", "t" }, "<C-w>k", [[<C-\><C-n><C-w>k]], { noremap = true, silent = true })
+vim.keymap.set({ "i", "n", "t" }, "<C-w>l", [[<C-\><C-n><C-w>l]], { noremap = true, silent = true })
 
-vim.api.nvim_create_user_command('Capture', require('utils.capture'), { nargs = '+', desc = 'capture command output and send to a scratch buffer' })
+-- catch tmux jumps - navigate between vim windows
+vim.keymap.set({ "i", "n", "t" }, "<C-b>h", [[<C-\><C-n><C-w>h]], { noremap = true, silent = true })
+vim.keymap.set({ "i", "n", "t" }, "<C-b>j", [[<C-\><C-n><C-w>j]], { noremap = true, silent = true })
+vim.keymap.set({ "i", "n", "t" }, "<C-b>k", [[<C-\><C-n><C-w>k]], { noremap = true, silent = true })
+vim.keymap.set({ "i", "n", "t" }, "<C-b>l", [[<C-\><C-n><C-w>l]], { noremap = true, silent = true })
+
+vim.api.nvim_create_user_command(
+	"Capture",
+	require("utils.capture"),
+	{ nargs = "+", desc = "capture command output and send to a scratch buffer" }
+)
 
 vim.opt.updatetime = 1000
