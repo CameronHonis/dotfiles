@@ -158,7 +158,9 @@
     wireshark
     xclip
     xz
+    zoom-us
     zulu25
+
   ];
 
   services.openssh.enable = true;
