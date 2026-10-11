@@ -60,7 +60,10 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = false;
+    # RTX 3070 (Ampere) fully supports the open kernel modules; NVIDIA
+    # recommends them over the proprietary blob for Turing+, and crashes
+    # produce usable tracebacks (investigating hard freezes, 2026-10-11)
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
