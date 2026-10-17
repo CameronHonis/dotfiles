@@ -110,18 +110,25 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# pyenv
+# python
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 export PATH="/usr/bin/python3:$PATH"
 export PATH="/home/camer/.local/bin:$PATH"
 
+# go
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$(go env GOPATH)/bin"
 
+# lua
 export PATH="$PATH:/lib/lua-5.4.6/src"
-. "$HOME/.cargo/env"
+
+# rust
+CARGO_PATH="$HOME/.cargo/"
+if [ -f "$CARGO_PATH/env" ]; then
+    . "$HOME/.cargo/env"
+fi
 
 export PATH="$PATH:/usr/lib/poetry/bin"
 export TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
